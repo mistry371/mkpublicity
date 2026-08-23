@@ -1,3 +1,4 @@
+import PageHero from '../components/PageHero';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
@@ -34,22 +35,12 @@ export default function Industries() {
 
   return (
     <>
-      <section className="page-hero" id="industries-hero">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="page-hero-label">Industries We Serve</div>
-            <h1>Expertise Across <span className="text-gradient">18+ Industries</span></h1>
-            <p>
-              Whatever your industry, we have the experience and expertise to drive
-              measurable growth for your business.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero 
+        label="Industries We Serve"
+        title="Expertise Across Sectors"
+        highlight="Sectors"
+        description="From manufacturing to tech startups, we've driven explosive growth across 18+ high-stakes industries."
+      />
 
       <section className="section">
         <div className="container">

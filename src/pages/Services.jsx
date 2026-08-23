@@ -1,3 +1,4 @@
+import PageHero from '../components/PageHero';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
@@ -35,22 +36,12 @@ export default function Services() {
 
   return (
     <>
-      <section className="page-hero" id="services-hero">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="page-hero-label">Our Services</div>
-            <h1>11 Ways to <span className="text-gradient">Grow</span> Your Brand</h1>
-            <p>
-              Comprehensive marketing, PR, and media solutions designed to build visibility,
-              strengthen credibility, and achieve measurable growth.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero 
+        label="Our Services"
+        title="11 Ways to Grow Your Brand"
+        highlight="Grow"
+        description="Comprehensive marketing, PR, and media solutions designed to build visibility and achieve measurable growth."
+      />
 
       <section className="section">
         <div className="container">

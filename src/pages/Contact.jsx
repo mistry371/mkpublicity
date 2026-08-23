@@ -1,3 +1,4 @@
+import PageHero from '../components/PageHero';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Phone, Mail, MessageCircle, MapPin } from 'lucide-react';
@@ -35,22 +36,12 @@ I'd like to discuss this further!`;
 
   return (
     <>
-      <section className="page-hero" id="contact-hero">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="page-hero-label">Contact Us</div>
-            <h1>Let's Start a <span className="text-gradient">Conversation</span></h1>
-            <p>
-              Ready to grow your brand? Fill out the form and we'll connect with you
-              on WhatsApp for a detailed discussion.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero 
+        label="Contact Us"
+        title="Let's Build Your Legacy"
+        highlight="Legacy"
+        description="Ready to scale? Our experts are standing by to engineer your next big growth phase."
+      />
 
       <section className="section">
         <div className="container">

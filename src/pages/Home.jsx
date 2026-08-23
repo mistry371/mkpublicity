@@ -12,6 +12,7 @@ import TestimonialCarousel from '../components/TestimonialCarousel';
 import IndustryGrid from '../components/IndustryGrid';
 import { services, industries, processSteps, testimonials, stats, whyChooseUs, getWhatsAppLink } from '../data';
 import { useModal } from '../context/ModalContext';
+import ClientMarquee from '../components/ClientMarquee';
 
 export default function Home() {
   const { openModal } = useModal();
@@ -176,6 +177,9 @@ export default function Home() {
 
 
       </section>
+
+      {/* ═══ CLIENT LOGOS MARQUEE ═══ */}
+      <ClientMarquee />
 
       {/* ═══ STATS ═══ */}
       <StatsCounter stats={stats} />

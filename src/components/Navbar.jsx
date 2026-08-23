@@ -35,9 +35,17 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
+  const isDarkHero = location.pathname === '/about';
+  
+  // Determine base text color based on page theme and scroll state
+  let baseColor = 'var(--text-primary)';
+  if (isDarkHero && !scrolled && !mobileOpen) {
+    baseColor = 'rgba(255, 255, 255, 0.9)';
+  }
+
   return (
     <>
-      <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${mobileOpen ? 'menu-open' : ''}`} id="main-nav">
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${mobileOpen ? 'menu-open' : ''} ${isDarkHero && !scrolled ? 'navbar-dark-hero' : ''}`} id="main-nav">
         <div className="navbar-inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/" className="navbar-logo" id="logo-link" style={{ display: 'flex', alignItems: 'center', zIndex: 100 }}>
             <img src="/logo.jpg" alt="MK Publicity Logo" style={{ height: '70px', width: 'auto', objectFit: 'contain' }} />
@@ -52,7 +60,7 @@ export default function Navbar() {
                 style={{
                   fontWeight: 600,
                   fontSize: '0.95rem',
-                  color: location.pathname === link.path ? 'var(--primary)' : 'var(--text-primary)',
+                  color: location.pathname === link.path ? 'var(--primary)' : baseColor,
                   transition: 'color 0.2s ease'
                 }}
               >
@@ -76,9 +84,9 @@ export default function Navbar() {
               onClick={() => setMobileOpen(!mobileOpen)}
               style={{ cursor: 'pointer', flexDirection: 'column', gap: '6px', padding: '10px' }}
             >
-              <motion.span animate={mobileOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }} style={{ width: '30px', height: '2px', background: mobileOpen ? '#000' : 'var(--text-primary)', display: 'block', transformOrigin: 'center' }}></motion.span>
-              <motion.span animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }} style={{ width: '20px', height: '2px', background: 'var(--text-primary)', display: 'block', marginLeft: 'auto' }}></motion.span>
-              <motion.span animate={mobileOpen ? { rotate: -45, y: -8, width: '30px' } : { rotate: 0, y: 0, width: '30px' }} style={{ width: '30px', height: '2px', background: mobileOpen ? '#000' : 'var(--text-primary)', display: 'block', transformOrigin: 'center' }}></motion.span>
+              <motion.span animate={mobileOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }} style={{ width: '30px', height: '2px', background: mobileOpen ? '#000' : baseColor, display: 'block', transformOrigin: 'center' }}></motion.span>
+              <motion.span animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }} style={{ width: '20px', height: '2px', background: baseColor, display: 'block', marginLeft: 'auto' }}></motion.span>
+              <motion.span animate={mobileOpen ? { rotate: -45, y: -8, width: '30px' } : { rotate: 0, y: 0, width: '30px' }} style={{ width: '30px', height: '2px', background: mobileOpen ? '#000' : baseColor, display: 'block', transformOrigin: 'center' }}></motion.span>
             </div>
           </div>
         </div>

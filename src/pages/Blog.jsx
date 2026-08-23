@@ -1,3 +1,4 @@
+import PageHero from '../components/PageHero';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
@@ -11,22 +12,12 @@ export default function Blog() {
 
   return (
     <>
-      <section className="page-hero" id="blog-hero">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="page-hero-label">Insights & Knowledge</div>
-            <h1>Marketing <span className="text-gradient">Insights</span></h1>
-            <p>
-              Stay ahead of the curve with our latest thoughts on digital marketing,
-              branding, public relations, and business growth.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero 
+        label="Insights & Knowledge"
+        title="Strategies for Market Dominance"
+        highlight="Dominance"
+        description="Deep dives, case studies, and actionable insights from the frontlines of marketing and PR."
+      />
 
       <section className="section">
         <div className="container">

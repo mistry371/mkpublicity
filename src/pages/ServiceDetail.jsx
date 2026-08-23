@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Navigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Sparkles, Check, ArrowRight, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Check, CheckCircle2, MessageCircle } from 'lucide-react';
+import PageHero from '../components/PageHero';
 import ScrollReveal from '../components/ScrollReveal';
 import CTAButton from '../components/CTAButton';
 import { services, getWhatsAppLink } from '../data';

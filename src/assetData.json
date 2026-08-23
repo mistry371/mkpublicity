@@ -1,0 +1,989 @@
+{
+  "clients": [
+    "/assets/clients/1-1.jpeg",
+    "/assets/clients/10-2.jpeg",
+    "/assets/clients/11-3.jpeg",
+    "/assets/clients/12-4.jpeg",
+    "/assets/clients/13-5.jpeg",
+    "/assets/clients/14-6.jpeg",
+    "/assets/clients/15-7.jpeg",
+    "/assets/clients/16-8.jpeg",
+    "/assets/clients/17-9.jpeg",
+    "/assets/clients/18-10.jpeg",
+    "/assets/clients/19-11.jpeg",
+    "/assets/clients/2-12.jpeg",
+    "/assets/clients/20-13.jpeg",
+    "/assets/clients/21-14.jpeg",
+    "/assets/clients/22-15.jpeg",
+    "/assets/clients/23-16.jpeg",
+    "/assets/clients/24-17.jpeg",
+    "/assets/clients/25-18.jpeg",
+    "/assets/clients/26-19.jpeg",
+    "/assets/clients/27-20.jpeg",
+    "/assets/clients/28-21.jpeg",
+    "/assets/clients/29-22.jpeg",
+    "/assets/clients/3-23.png",
+    "/assets/clients/30-24.jpeg",
+    "/assets/clients/31-25.jpeg",
+    "/assets/clients/32-26.jpeg",
+    "/assets/clients/33-27.jpeg",
+    "/assets/clients/34-28.jpeg",
+    "/assets/clients/35-29.jpeg",
+    "/assets/clients/36-30.jpeg",
+    "/assets/clients/37-31.jpeg",
+    "/assets/clients/4-32.jpeg",
+    "/assets/clients/5g-v31-pro-1-1-33.png",
+    "/assets/clients/6-34.jpeg",
+    "/assets/clients/605764740-1428831835613586-1336689472923565590-n-35.jpg",
+    "/assets/clients/7-36.jpeg",
+    "/assets/clients/8-37.jpeg",
+    "/assets/clients/9-38.jpg",
+    "/assets/clients/ajit-zone-surat-logo-39.jpg",
+    "/assets/clients/bullish-bazaar-logo-40.png",
+    "/assets/clients/guru-physiotherapy-41.jpeg",
+    "/assets/clients/gyanam-college-of-management-and-technology-logo-jpg-42.jpeg",
+    "/assets/clients/imagessaraswati-vidhyalay-school-logo-43.jpg",
+    "/assets/clients/jalpooree-logo-44.jpg",
+    "/assets/clients/kr-wealth-creations-logo-45.jpg",
+    "/assets/clients/krish-bhog-sweets-and-namkeen-46.jpeg",
+    "/assets/clients/logo-47.png",
+    "/assets/clients/mega-city-48.jpeg",
+    "/assets/clients/mount-litera-zee-school-bardoli-logo-49.jpg",
+    "/assets/clients/mount-litera-zee-school-diamond-city-chalthan-logo-50.jpg",
+    "/assets/clients/munjani-toyota-logo-51.jpg",
+    "/assets/clients/phone-mart-kim-52.png",
+    "/assets/clients/prayosha-53.jpg",
+    "/assets/clients/sent-mark-school-adajan-logo-54.jpg",
+    "/assets/clients/siya-creations-55.jpeg",
+    "/assets/clients/stock-win-logo-56.jpg",
+    "/assets/clients/vasisth-international-school-kim-logo-57.jpg"
+  ],
+  "itProjects": [
+    {
+      "title": "Betkar Farm Premium Organic Poultry Goat Farm",
+      "image": "/assets/it/betkar-farm-premium-organic-poultry-goat-farm-59.png",
+      "originalName": "Betkar-Farm-Premium-Organic-Poultry-Goat-Farm",
+      "pdf": "/assets/it/betkar-farm-premium-organic-poultry-goat-farm-78.pdf"
+    },
+    {
+      "title": "Beyond Classroom Premium Mathematics Education for Class 1–8",
+      "image": "/assets/it/beyond-classroom-premium-mathematics-education-for-class-1-8-61.png",
+      "originalName": "Beyond-Classroom-Premium-Mathematics-Education-for-Class-1–8",
+      "pdf": "/assets/it/beyond-classroom-premium-mathematics-education-for-class-1-8-79.pdf"
+    },
+    {
+      "title": "Devam Bracelet – Sunstone Crystal Bracelet for Energy Confidence",
+      "image": "/assets/it/devam-bracelet-sunstone-crystal-bracelet-for-energy-confidence-63.png",
+      "originalName": "Devam-Bracelet-–-Sunstone-Crystal-Bracelet-for-Energy-Confidence",
+      "pdf": "/assets/it/devam-bracelet-sunstone-crystal-bracelet-for-energy-confidence-80.pdf"
+    },
+    {
+      "title": "Elite Digital Cards Transform Your Business Presence Stratix Alliance",
+      "image": "/assets/it/elite-digital-cards-transform-your-business-presence-stratix-alliance-65.png",
+      "originalName": "Elite-Digital-Cards-Transform-Your-Business-Presence-Stratix-Alliance",
+      "pdf": "/assets/it/elite-digital-cards-transform-your-business-presence-stratix-alliance-81.pdf"
+    },
+    {
+      "title": "Ideal Talent Connect",
+      "image": "/assets/it/ideal-talent-connect-67.png",
+      "originalName": "Ideal-Talent-Connect",
+      "pdf": "/assets/it/ideal-talent-connect-82.pdf"
+    },
+    {
+      "title": "LabourPlatform On Demand Workforce",
+      "image": "/assets/it/labourplatform-on-demand-workforce-69.png",
+      "originalName": "LabourPlatform-—-On-Demand-Workforce",
+      "pdf": "/assets/it/labourplatform-on-demand-workforce-83.pdf"
+    },
+    {
+      "title": "ServStacks Technologies Enterprise IT Infrastructure Solutions Services (1)",
+      "image": "/assets/it/servstacks-technologies-enterprise-it-infrastructure-solutions-services-1-72.png",
+      "originalName": "ServStacks-Technologies-Enterprise-IT-Infrastructure-Solutions-Services (1)",
+      "pdf": "/assets/it/servstacks-technologies-enterprise-it-infrastructure-solutions-services-85.pdf"
+    },
+    {
+      "title": "ServStacks Technologies Enterprise IT Infrastructure Solutions Services",
+      "image": "/assets/it/servstacks-technologies-enterprise-it-infrastructure-solutions-services-73.png",
+      "originalName": "ServStacks-Technologies-Enterprise-IT-Infrastructure-Solutions-Services"
+    },
+    {
+      "title": "Talentguru",
+      "image": "/assets/it/talentguru-75.png",
+      "originalName": "Talentguru",
+      "pdf": "/assets/it/talentguru-86.pdf"
+    },
+    {
+      "title": "Trusted Logistics Services Provider Laxmipati International",
+      "image": "/assets/it/trusted-logistics-services-provider-laxmipati-international-77.png",
+      "originalName": "Trusted-Logistics-Services-Provider-Laxmipati-International",
+      "pdf": "/assets/it/trusted-logistics-services-provider-laxmipati-international-87.pdf"
+    }
+  ],
+  "marketing": [
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-aug-1-2026-12-02-41-am-88.png"
+    },
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-aug-1-2026-12-05-44-am-89.png"
+    },
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-aug-1-2026-12-07-21-am-90.png"
+    },
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-aug-1-2026-12-08-49-am-91.png"
+    },
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-aug-1-2026-12-10-43-am-92.png"
+    },
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-aug-1-2026-12-12-54-am-93.png"
+    },
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-aug-1-2026-12-14-32-am-94.png"
+    },
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-aug-1-2026-12-20-21-am-95.png"
+    },
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-aug-1-2026-12-22-17-am-96.png"
+    },
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-aug-1-2026-12-24-04-am-97.png"
+    },
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-jul-31-2026-11-50-40-pm-98.png"
+    },
+    {
+      "category": "Automobile",
+      "categorySlug": "automobile",
+      "image": "/assets/marketing/automobile/chatgpt-image-jul-31-2026-11-54-02-pm-99.png"
+    },
+    {
+      "category": "Education",
+      "categorySlug": "education",
+      "image": "/assets/marketing/education/chatgpt-image-aug-1-2026-08-52-55-pm-100.png"
+    },
+    {
+      "category": "Education",
+      "categorySlug": "education",
+      "image": "/assets/marketing/education/chatgpt-image-aug-1-2026-08-58-36-pm-101.png"
+    },
+    {
+      "category": "Education",
+      "categorySlug": "education",
+      "image": "/assets/marketing/education/chatgpt-image-aug-1-2026-09-05-35-pm-102.png"
+    },
+    {
+      "category": "Education",
+      "categorySlug": "education",
+      "image": "/assets/marketing/education/chatgpt-image-aug-1-2026-09-18-05-pm-103.png"
+    },
+    {
+      "category": "Education",
+      "categorySlug": "education",
+      "image": "/assets/marketing/education/chatgpt-image-aug-1-2026-12-32-48-am-104.png"
+    },
+    {
+      "category": "Education",
+      "categorySlug": "education",
+      "image": "/assets/marketing/education/chatgpt-image-aug-1-2026-12-35-25-am-105.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/1-106.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/10-107.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/11-108.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/2-109.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/3-110.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/4-111.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/5-112.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/6-113.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/7-114.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/8-115.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/9-116.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-00000000045881fd86485837abc9f14c-117.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-000000002228820b8324570762bd7631-118.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-0000000061ac82098e293327549245d3-119.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-000000006c18820bb25b778ada3fef6d-120.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-00000000789c81fa922ac906b92530a9-121.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-000000007a8481fb957ff35c48ec09ae-122.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-0000000096a482098e9210348882467a-123.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-00000000970881faaa6de8f88b384981-124.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-00000000a018821193fbf47c06e84308-125.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-00000000a4d48211b37fbea658f54661-126.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-00000000b7d481faaed043385ae22ba9-127.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-00000000cb3081faad0d9958a5758954-128.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-00000000facc82118ef0b3aa24c09d59-129.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-00000000fc908209aac8fb04335836a5-130.png"
+    },
+    {
+      "category": "Festival Post",
+      "categorySlug": "festival-post",
+      "image": "/assets/marketing/festival-post/file-00000000fd5881fa9e72447f2d8385ae-131.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-aug-1-2026-12-01-42-am-132.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-aug-1-2026-12-03-57-am-133.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-jul-31-2026-11-40-52-pm-134.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-jul-31-2026-11-42-39-pm-135.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-jul-31-2026-11-43-48-pm-1-136.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-jul-31-2026-11-46-36-pm-137.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-jul-31-2026-11-47-49-pm-138.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-jul-31-2026-11-49-44-pm-139.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-jul-31-2026-11-51-12-pm-140.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-jul-31-2026-11-52-50-pm-1-141.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-jul-31-2026-11-55-25-pm-142.png"
+    },
+    {
+      "category": "Finance",
+      "categorySlug": "finance",
+      "image": "/assets/marketing/finance/chatgpt-image-jul-31-2026-11-57-06-pm-143.png"
+    },
+    {
+      "category": "Jewel",
+      "categorySlug": "jewel",
+      "image": "/assets/marketing/jewel/chatgpt-image-aug-1-2026-08-54-59-pm-144.png"
+    },
+    {
+      "category": "Jewel",
+      "categorySlug": "jewel",
+      "image": "/assets/marketing/jewel/chatgpt-image-aug-1-2026-08-58-08-pm-145.png"
+    },
+    {
+      "category": "Jewel",
+      "categorySlug": "jewel",
+      "image": "/assets/marketing/jewel/chatgpt-image-aug-1-2026-09-05-00-pm-146.png"
+    },
+    {
+      "category": "Jewel",
+      "categorySlug": "jewel",
+      "image": "/assets/marketing/jewel/chatgpt-image-aug-1-2026-09-08-22-pm-147.png"
+    },
+    {
+      "category": "Jewel",
+      "categorySlug": "jewel",
+      "image": "/assets/marketing/jewel/chatgpt-image-aug-1-2026-09-17-45-pm-148.png"
+    },
+    {
+      "category": "Jewel",
+      "categorySlug": "jewel",
+      "image": "/assets/marketing/jewel/chatgpt-image-aug-1-2026-09-21-08-pm-149.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/1-150.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/2-151.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/chatgpt-image-jul-31-2026-11-05-25-pm-152.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/chatgpt-image-jul-31-2026-11-10-40-pm-153.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/chatgpt-image-jul-31-2026-11-18-14-pm-154.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/chatgpt-image-jul-31-2026-11-22-31-pm-155.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/chatgpt-image-jul-31-2026-11-34-52-pm-156.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/chatgpt-image-jul-31-2026-11-36-35-pm-157.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/chatgpt-image-jul-31-2026-11-39-12-pm-158.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/chatgpt-image-jul-31-2026-11-41-56-pm-159.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/chatgpt-image-jul-31-2026-11-45-33-pm-160.png"
+    },
+    {
+      "category": "Logistic",
+      "categorySlug": "logistic",
+      "image": "/assets/marketing/logistic/chatgpt-image-jul-31-2026-11-48-19-pm-161.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-06-45-am-162.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-08-21-am-163.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-10-18-am-164.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-12-22-am-165.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-14-51-am-166.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-19-40-am-167.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-21-35-am-168.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-22-53-am-169.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-25-15-am-170.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-26-55-am-171.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-28-17-am-172.png"
+    },
+    {
+      "category": "Manufacturing",
+      "categorySlug": "manufacturing",
+      "image": "/assets/marketing/manufacturing/chatgpt-image-aug-1-2026-12-30-47-am-173.png"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-11-31-174.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-13-32-175.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-20-25-176.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-26-42-177.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-28-54-178.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-29-55-179.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-33-21-180.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-34-52-181.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-38-59-182.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-39-33-183.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-54-35-184.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-00-55-43-185.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-01-06-44-186.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-01-11-39-187.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-01-16-56-188.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-01-23-20-189.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-01-23-34-190.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-01-27-49-191.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-01-33-03-192.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-10-32-40-193.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-10-35-57-194.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-10-37-05-195.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-10-39-50-196.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-10-45-40-197.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-10-48-17-198.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-10-50-43-199.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-10-55-44-200.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-11-00-45-201.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-11-21-15-202.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-11-22-13-203.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-11-28-21-204.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-11-30-07-205.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-11-33-48-206.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-11-35-48-207.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-11-39-35-208.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-11-41-39-209.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-12-10-04-210.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-12-39-02-211.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-12-39-31-212.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-12-44-05-213.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-12-45-15-214.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-12-55-20-215.jpeg"
+    },
+    {
+      "category": "Performance Marketing",
+      "categorySlug": "performance-marketing",
+      "image": "/assets/marketing/performance-marketing/whatsapp-image-2026-02-19-at-13-04-48-216.jpeg"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-11-37-am-217.png"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-13-50-am-218.png"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-15-59-am-219.png"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-18-41-am-220.png"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-19-05-am-221.png"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-20-58-am-222.png"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-24-44-am-223.png"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-27-30-am-224.png"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-28-51-am-225.png"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-33-25-am-226.png"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-34-55-am-227.png"
+    },
+    {
+      "category": "Pharma",
+      "categorySlug": "pharma",
+      "image": "/assets/marketing/pharma/chatgpt-image-aug-1-2026-12-38-44-am-228.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/1-229.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/10-230.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/11-231.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/12-232.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/2-233.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/3-234.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/4-235.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/5-236.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/6-237.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/7-238.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/8-239.png"
+    },
+    {
+      "category": "Real-state",
+      "categorySlug": "real-state",
+      "image": "/assets/marketing/real-state/9-240.png"
+    },
+    {
+      "category": "Recruitment firm & HR",
+      "categorySlug": "recruitment-firm-hr",
+      "image": "/assets/marketing/recruitment-firm-hr/chatgpt-image-aug-1-2026-08-58-59-pm-241.png"
+    },
+    {
+      "category": "Recruitment firm & HR",
+      "categorySlug": "recruitment-firm-hr",
+      "image": "/assets/marketing/recruitment-firm-hr/chatgpt-image-aug-1-2026-09-17-57-pm-242.png"
+    },
+    {
+      "category": "Recruitment firm & HR",
+      "categorySlug": "recruitment-firm-hr",
+      "image": "/assets/marketing/recruitment-firm-hr/chatgpt-image-aug-1-2026-09-21-35-pm-243.png"
+    },
+    {
+      "category": "Recruitment firm & HR",
+      "categorySlug": "recruitment-firm-hr",
+      "image": "/assets/marketing/recruitment-firm-hr/chatgpt-image-aug-1-2026-12-25-42-am-244.png"
+    },
+    {
+      "category": "Recruitment firm & HR",
+      "categorySlug": "recruitment-firm-hr",
+      "image": "/assets/marketing/recruitment-firm-hr/chatgpt-image-aug-1-2026-12-29-26-am-245.png"
+    },
+    {
+      "category": "Recruitment firm & HR",
+      "categorySlug": "recruitment-firm-hr",
+      "image": "/assets/marketing/recruitment-firm-hr/chatgpt-image-aug-1-2026-12-34-10-am-246.png"
+    },
+    {
+      "category": "Recruitment firm & HR",
+      "categorySlug": "recruitment-firm-hr",
+      "image": "/assets/marketing/recruitment-firm-hr/chatgpt-image-aug-1-2026-12-36-31-am-247.png"
+    },
+    {
+      "category": "Recruitment firm & HR",
+      "categorySlug": "recruitment-firm-hr",
+      "image": "/assets/marketing/recruitment-firm-hr/chatgpt-image-aug-1-2026-12-37-55-am-248.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-aug-1-2026-12-00-49-am-249.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-aug-1-2026-12-03-16-am-250.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-aug-1-2026-12-06-17-am-251.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-aug-1-2026-12-07-52-am-252.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-aug-1-2026-12-09-49-am-253.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-jul-31-2026-11-47-17-pm-254.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-jul-31-2026-11-49-17-pm-255.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-jul-31-2026-11-52-15-pm-1-256.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-jul-31-2026-11-52-15-pm-2-257.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-jul-31-2026-11-54-29-pm-258.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-jul-31-2026-11-56-27-pm-259.png"
+    },
+    {
+      "category": "Restaurants",
+      "categorySlug": "restaurants",
+      "image": "/assets/marketing/restaurants/chatgpt-image-jul-31-2026-11-58-37-pm-260.png"
+    }
+  ]
+}

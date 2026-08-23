@@ -1,3 +1,4 @@
+import PageHero from '../components/PageHero';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Target, Lightbulb, Rocket, MessageCircle } from 'lucide-react';
@@ -12,22 +13,12 @@ export default function Process() {
 
   return (
     <>
-      <section className="page-hero" id="process-hero">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="page-hero-label">Our Process</div>
-            <h1>A Proven Path to <span className="text-gradient">Growth</span></h1>
-            <p>
-              Our systematic 6-step methodology ensures every campaign delivers
-              predictable, measurable results.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero 
+        label="Our Process"
+        title="The Blueprint for Success"
+        highlight="Success"
+        description="A proven, data-driven methodology that ensures predictable and scalable results for every campaign."
+      />
 
       <section className="section">
         <div className="container">

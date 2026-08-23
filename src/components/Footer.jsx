@@ -1,88 +1,275 @@
 import { Link } from 'react-router-dom';
-import { services, EMAIL, PHONE, ADDRESS, getWhatsAppLink } from '../data';
-import { useModal } from '../context/ModalContext';
-import { Phone, Mail, MapPin, MessageCircle, Heart } from 'lucide-react';
+import { services, EMAIL, PHONE, ADDRESS } from '../data';
+import { Phone, Mail, MapPin } from 'lucide-react';
 import { FaInstagram, FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
-import ScrollReveal from './ScrollReveal';
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const { openModal } = useModal();
 
   return (
-    <footer className="footer" id="footer">
-      <div className="container">
-        <ScrollReveal>
-          <div className="footer-grid">
-            <div className="footer-brand">
-              <Link to="/" className="navbar-logo" style={{ marginBottom: '8px' }}>
-                <div className="navbar-logo-icon">mk</div>
-                <div className="navbar-logo-text">
-                  <span>MK Publicity</span>
-                  <span>Your Success, Our Mission</span>
-                </div>
-              </Link>
-              <p>
-                Full-service marketing, PR & media agency delivering integrated strategies
-                for measurable business growth. From startups to enterprises, we build brands
-                that dominate markets.
-              </p>
-              <div className="footer-social">
-                <a href="https://www.instagram.com/mkpublicitysurat" target="_blank" rel="noopener noreferrer" className="footer-social-link" id="social-instagram"><FaInstagram size={20} /></a>
-                <a href="https://www.facebook.com/mkpublicitysurat" target="_blank" rel="noopener noreferrer" className="footer-social-link" id="social-facebook"><FaFacebookF size={20} /></a>
-                <a href="https://www.linkedin.com/company/mkpublicity" target="_blank" rel="noopener noreferrer" className="footer-social-link" id="social-linkedin"><FaLinkedinIn size={20} /></a>
-                <a href="https://www.youtube.com/@mkpublicity" target="_blank" rel="noopener noreferrer" className="footer-social-link" id="social-youtube"><FaYoutube size={20} /></a>
-              </div>
-            </div>
-
-            <div className="footer-col">
-              <h4>Services</h4>
-              {services.slice(0, 6).map(s => (
-                <Link key={s.id} to={`/services/${s.id}`}>{s.title}</Link>
-              ))}
-            </div>
-
-            <div className="footer-col">
-              <h4>Company</h4>
-              <Link to="/about">About Us</Link>
-              <Link to="/portfolio">Our Work</Link>
-              <Link to="/process">Our Process</Link>
-              <Link to="/industries">Industries</Link>
-              <Link to="/blog">Blog & Insights</Link>
-              <Link to="/contact">Contact Us</Link>
-            </div>
-
-            <div className="footer-col">
-              <h4>Get in Touch</h4>
-              <div className="footer-contact-item">
-                <span className="footer-contact-icon"><Phone size={18} /></span>
-                <a href={`tel:+91${PHONE}`}>+91 {PHONE}</a>
-              </div>
-              <div className="footer-contact-item">
-                <span className="footer-contact-icon"><Mail size={18} /></span>
-                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-              </div>
-              <div className="footer-contact-item">
-                <span className="footer-contact-icon"><MapPin size={18} /></span>
-                <span>{ADDRESS}</span>
-              </div>
-              <button
-                onClick={openModal}
-                className="btn btn-primary"
-                style={{ width: '100%', display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '12px' }}
-                id="footer-whatsapp-cta"
-              >
-                <MessageCircle size={18} /> Chat Now
-              </button>
-            </div>
+    <footer className="mk-footer">
+      <div className="mk-footer-grid">
+        {/* Brand Column */}
+        <div className="mk-footer-col mk-footer-brand">
+          <Link to="/" className="mk-footer-logo">
+            <img src="/logo.jpg" alt="MK Publicity Logo" className="mk-footer-logo-img" />
+          </Link>
+          <p className="mk-footer-desc">
+            We combine strategic clarity, creative thinking and commercial focus to build brands that dominate their markets.
+          </p>
+          <div className="mk-footer-social">
+            <a href="https://www.instagram.com/mkpublicitysurat" target="_blank" rel="noopener noreferrer"><FaInstagram size={18} /></a>
+            <a href="https://www.facebook.com/mkpublicitysurat" target="_blank" rel="noopener noreferrer"><FaFacebookF size={18} /></a>
+            <a href="https://www.linkedin.com/company/mkpublicity" target="_blank" rel="noopener noreferrer"><FaLinkedinIn size={18} /></a>
+            <a href="https://www.youtube.com/@mkpublicity" target="_blank" rel="noopener noreferrer"><FaYoutube size={18} /></a>
           </div>
-        </ScrollReveal>
+        </div>
 
-        <div className="footer-bottom">
-          <span>© {year} MK Publicity. All rights reserved.</span>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>Designed with <Heart size={14} style={{ color: 'red', fill: 'red' }} /> in Surat, Gujarat</span>
+        {/* Services Column */}
+        <div className="mk-footer-col">
+          <h4 className="mk-footer-heading">Expertise</h4>
+          <ul className="mk-footer-links">
+            {services.slice(0, 5).map(s => (
+              <li key={s.id}><Link to={`/services/${s.id}`}>{s.title}</Link></li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Company Column */}
+        <div className="mk-footer-col">
+          <h4 className="mk-footer-heading">Company</h4>
+          <ul className="mk-footer-links">
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/portfolio">Our Work</Link></li>
+            <li><Link to="/process">Methodology</Link></li>
+            <li><Link to="/industries">Industries</Link></li>
+            <li><Link to="/blog">Insights</Link></li>
+          </ul>
+        </div>
+
+        {/* Contact Column */}
+        <div className="mk-footer-col">
+          <h4 className="mk-footer-heading">Connect</h4>
+          <ul className="mk-footer-contact">
+            <li>
+              <Phone size={16} className="mk-icon-gold" />
+              <a href={`tel:+91${PHONE}`}>+91 {PHONE}</a>
+            </li>
+            <li>
+              <Mail size={16} className="mk-icon-gold" />
+              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </li>
+            <li>
+              <MapPin size={16} className="mk-icon-gold" style={{ flexShrink: 0 }} />
+              <span>{ADDRESS}</span>
+            </li>
+          </ul>
         </div>
       </div>
+
+      <div className="mk-footer-bottom">
+        <div className="mk-footer-bottom-content">
+          <span>&copy; {year} MK Publicity. All rights reserved.</span>
+          <div className="mk-footer-legal">
+            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/terms">Terms of Service</Link>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        .mk-footer {
+          background: #ffffff;
+          color: #111;
+          padding: 90px 0 0 0;
+          font-family: 'Inter', system-ui, -apple-system, sans-serif;
+          border-top: 1px solid rgba(0,0,0,0.06);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .mk-footer-grid {
+          width: min(1240px, calc(100% - 64px));
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+          gap: 60px;
+          padding-bottom: 70px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .mk-footer-logo {
+          display: inline-flex;
+          margin-bottom: 24px;
+        }
+
+        .mk-footer-logo-img {
+          height: 60px;
+          width: auto;
+          object-fit: contain;
+        }
+
+        .mk-footer-desc {
+          color: #555;
+          font-size: 0.95rem;
+          line-height: 1.8;
+          max-width: 320px;
+          margin: 0 0 32px 0;
+          font-weight: 500;
+        }
+
+        .mk-footer-social {
+          display: flex;
+          gap: 14px;
+        }
+
+        .mk-footer-social a {
+          width: 42px;
+          height: 42px;
+          border-radius: 50%;
+          border: 1px solid rgba(0,0,0,0.08);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #333;
+          background: #fff;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .mk-footer-social a:hover {
+          background: #b6904a;
+          border-color: #b6904a;
+          color: #fff;
+          transform: translateY(-3px);
+          box-shadow: 0 6px 16px rgba(182,144,74,0.25);
+        }
+
+        .mk-footer-heading {
+          color: #111;
+          font-size: 13px;
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          font-weight: 800;
+          margin: 0 0 28px 0;
+        }
+
+        .mk-footer-links {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        .mk-footer-links a {
+          color: #555;
+          text-decoration: none;
+          font-size: 0.95rem;
+          font-weight: 500;
+          transition: color 0.2s ease, padding-left 0.2s ease;
+          display: inline-block;
+        }
+
+        .mk-footer-links a:hover {
+          color: #b6904a;
+          padding-left: 4px;
+        }
+
+        .mk-footer-contact {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .mk-footer-contact li {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          color: #555;
+          font-size: 0.95rem;
+          line-height: 1.6;
+          font-weight: 500;
+        }
+
+        .mk-footer-contact a {
+          color: #555;
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+
+        .mk-footer-contact a:hover {
+          color: #b6904a;
+        }
+
+        .mk-icon-gold {
+          color: #b6904a;
+          margin-top: 2px;
+        }
+
+        .mk-footer-bottom {
+          border-top: 1px solid rgba(0,0,0,0.06);
+          padding: 28px 0;
+          background: #f9f9fa;
+        }
+
+        .mk-footer-bottom-content {
+          width: min(1240px, calc(100% - 64px));
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          color: #777;
+          font-size: 13px;
+          font-weight: 500;
+        }
+
+        .mk-footer-legal {
+          display: flex;
+          gap: 24px;
+        }
+
+        .mk-footer-legal a {
+          color: #777;
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+
+        .mk-footer-legal a:hover {
+          color: #111;
+        }
+
+        @media (max-width: 1024px) {
+          .mk-footer-grid {
+            grid-template-columns: 1fr 1fr;
+            row-gap: 60px;
+          }
+          .mk-footer-brand {
+            grid-column: 1 / -1;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .mk-footer {
+            padding-top: 60px;
+          }
+          .mk-footer-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+            padding-bottom: 50px;
+          }
+          .mk-footer-bottom-content {
+            flex-direction: column;
+            gap: 16px;
+            text-align: center;
+          }
+        }
+      `}</style>
     </footer>
   );
 }
