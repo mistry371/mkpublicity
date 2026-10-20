@@ -1,0 +1,22 @@
+{
+  "name": "MK Publicity — Marketing, PR & IT Solutions Agency",
+  "short_name": "MK Publicity",
+  "description": "Full-service agency delivering high-impact Performance Marketing, Strategic PR, and IT Solutions in Surat & India.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0f12",
+  "theme_color": "#F5C518",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

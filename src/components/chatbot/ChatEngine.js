@@ -180,6 +180,11 @@ class ChatEngine {
       services_general: 5,
       performance_marketing: 7,
       public_relations: 7,
+      press_conference: 7,
+      digital_pr: 7,
+      media_management: 7,
+      social_media_ads: 7,
+      award_nominations: 7,
       advertising: 7,
       social_media: 7,
       influencer: 7,
@@ -218,6 +223,11 @@ class ChatEngine {
         return quickReplies.services;
       case 'performance_marketing':
       case 'public_relations':
+      case 'press_conference':
+      case 'digital_pr':
+      case 'media_management':
+      case 'social_media_ads':
+      case 'award_nominations':
       case 'advertising':
       case 'social_media':
       case 'influencer':

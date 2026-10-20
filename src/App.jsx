@@ -6,7 +6,6 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ChatWidget from './components/chatbot/ChatWidget';
 import PageTransition from './components/PageTransition';
-import CustomCursor from './components/CustomCursor';
 import NeedsAnalysisModal from './components/NeedsAnalysisModal';
 
 // Context
@@ -22,11 +21,14 @@ import Portfolio from './pages/Portfolio';
 import Process from './pages/Process';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import NotFound from './pages/NotFound';
 
 // Global Modal Wrapper Component
 function GlobalModal() {
-  const { isModalOpen, closeModal } = useModal();
-  return <NeedsAnalysisModal isOpen={isModalOpen} onClose={closeModal} />;
+  const { isModalOpen, closeModal, modalService } = useModal();
+  return <NeedsAnalysisModal isOpen={isModalOpen} onClose={closeModal} initialService={modalService} />;
 }
 
 function App() {
@@ -34,7 +36,6 @@ function App() {
 
   return (
     <ModalProvider>
-      <CustomCursor />
       <GlobalModal />
       <div className="app-container">
         <Navbar />
@@ -51,6 +52,9 @@ function App() {
               <Route path="/process" element={<PageTransition><Process /></PageTransition>} />
               <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
               <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
+              <Route path="/privacy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+              <Route path="/terms" element={<PageTransition><TermsOfService /></PageTransition>} />
+              <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
           </AnimatePresence>
         </main>

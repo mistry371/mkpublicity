@@ -1,10 +1,9 @@
-import { getWhatsAppLink } from '../data';
 import { MessageCircle } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
+import { trackConversionEvent } from '../utils/analytics';
 
 export default function CTAButton({
   text = 'Get Started',
-  message = 'Hi! I\'m interested in MK Publicity services. Can you help me?',
   variant = 'primary',
   size = '',
   icon: Icon = MessageCircle,
@@ -14,6 +13,7 @@ export default function CTAButton({
   const { openModal } = useModal();
 
   const handleClick = (e) => {
+    trackConversionEvent('primary_cta_click', { text, variant });
     if (onClick) {
       onClick(e);
       return;

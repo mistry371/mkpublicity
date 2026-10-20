@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { services, EMAIL, PHONE, ADDRESS } from '../data';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { FaInstagram, FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
+import { trackConversionEvent } from '../utils/analytics';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -15,13 +16,13 @@ export default function Footer() {
             <img src="/logo.jpg" alt="MK Publicity Logo" className="mk-footer-logo-img" />
           </Link>
           <p className="mk-footer-desc">
-            We combine strategic clarity, creative thinking and commercial focus to build brands that dominate their markets.
+            We unite Performance Marketing, Strategic Public Relations, and Custom IT Engineering to build brands that dominate their markets.
           </p>
           <div className="mk-footer-social">
-            <a href="https://www.instagram.com/mkpublicitysurat" target="_blank" rel="noopener noreferrer"><FaInstagram size={18} /></a>
-            <a href="https://www.facebook.com/mkpublicitysurat" target="_blank" rel="noopener noreferrer"><FaFacebookF size={18} /></a>
-            <a href="https://www.linkedin.com/company/mkpublicity" target="_blank" rel="noopener noreferrer"><FaLinkedinIn size={18} /></a>
-            <a href="https://www.youtube.com/@mkpublicity" target="_blank" rel="noopener noreferrer"><FaYoutube size={18} /></a>
+            <a href="https://www.instagram.com/mkpublicitysurat" target="_blank" rel="noopener noreferrer" aria-label="MK Publicity on Instagram"><FaInstagram size={18} /></a>
+            <a href="https://www.facebook.com/mkpublicitysurat" target="_blank" rel="noopener noreferrer" aria-label="MK Publicity on Facebook"><FaFacebookF size={18} /></a>
+            <a href="https://www.linkedin.com/company/mkpublicity" target="_blank" rel="noopener noreferrer" aria-label="MK Publicity on LinkedIn"><FaLinkedinIn size={18} /></a>
+            <a href="https://www.youtube.com/@mkpublicity" target="_blank" rel="noopener noreferrer" aria-label="MK Publicity on YouTube"><FaYoutube size={18} /></a>
           </div>
         </div>
 
@@ -53,11 +54,11 @@ export default function Footer() {
           <ul className="mk-footer-contact">
             <li>
               <Phone size={16} className="mk-icon-gold" />
-              <a href={`tel:+91${PHONE}`}>+91 {PHONE}</a>
+              <a href={`tel:+91${PHONE}`} onClick={() => trackConversionEvent('phone_click', { source: 'footer' })}>+91 {PHONE}</a>
             </li>
             <li>
               <Mail size={16} className="mk-icon-gold" />
-              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+              <a href={`mailto:${EMAIL}`} onClick={() => trackConversionEvent('email_click', { source: 'footer' })}>{EMAIL}</a>
             </li>
             <li>
               <MapPin size={16} className="mk-icon-gold" style={{ flexShrink: 0 }} />

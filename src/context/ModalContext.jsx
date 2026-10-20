@@ -8,13 +8,26 @@ export function useModal() {
 
 export function ModalProvider({ children }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalService, setModalService] = useState('');
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openModal = (serviceName = '') => {
+    if (typeof serviceName === 'string') {
+      setModalService(serviceName);
+    } else {
+      setModalService('');
+    }
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalService('');
+  };
 
   return (
-    <ModalContext.Provider value={{ isModalOpen, openModal, closeModal }}>
+    <ModalContext.Provider value={{ isModalOpen, modalService, openModal, closeModal }}>
       {children}
     </ModalContext.Provider>
   );
 }
+

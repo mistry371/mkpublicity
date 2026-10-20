@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 export default function ScrollReveal({ children, delay = 0, direction = 'up', className = '' }) {

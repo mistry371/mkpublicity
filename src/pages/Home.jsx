@@ -1,351 +1,311 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Sparkles, TrendingUp, Users, BarChart } from 'lucide-react';
-import ParticleBackground from '../components/ParticleBackground';
-import ScrollReveal from '../components/ScrollReveal';
-import CTAButton from '../components/CTAButton';
-import ServiceCard from '../components/ServiceCard';
-import StatsCounter from '../components/StatsCounter';
-import ProcessTimeline from '../components/ProcessTimeline';
-import TestimonialCarousel from '../components/TestimonialCarousel';
-import IndustryGrid from '../components/IndustryGrid';
-import { services, industries, processSteps, testimonials, stats, whyChooseUs, getWhatsAppLink } from '../data';
-import { useModal } from '../context/ModalContext';
+import { Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
+import HeroSignalBoard from '../components/HeroSignalBoard';
+import TickerMarquee from '../components/TickerMarquee';
 import ClientMarquee from '../components/ClientMarquee';
+import TrinityEcosystem from '../components/TrinityEcosystem';
+import GrowthFramework from '../components/GrowthFramework';
+import StatsCounter from '../components/StatsCounter';
+import ArchitecturalServiceGrid from '../components/ArchitecturalServiceGrid';
+import BrandPublicitySection from '../components/BrandPublicitySection';
+import DualIndustryMarquee from '../components/DualIndustryMarquee';
+import CampaignStack from '../components/CampaignStack';
+import RevenueCalculator from '../components/RevenueCalculator';
+import TestimonialCarousel from '../components/TestimonialCarousel';
+import AEOAnswerSection from '../components/AEOAnswerSection';
+import InstantBriefModal from '../components/InstantBriefModal';
+import { stats, testimonials, strategicFAQs, getWhatsAppLink } from '../data';
+import { useModal } from '../context/ModalContext';
+import { trackConversionEvent } from '../utils/analytics';
 
 export default function Home() {
   const { openModal } = useModal();
+  const [isBriefModalOpen, setIsBriefModalOpen] = useState(false);
+  const [selectedServiceForBrief, setSelectedServiceForBrief] = useState('');
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleOpenBrief = (serviceName = 'Integrated Marketing & PR') => {
+    trackConversionEvent('primary_cta_click', { service: serviceName, location: 'home_hero' });
+    openModal(serviceName);
+  };
+
+  const homeFaqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': strategicFAQs.map(faq => ({
+      '@type': 'Question',
+      'name': faq.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': `${faq.shortAnswer} ${faq.detailedAnswer}`
+      }
+    }))
+  };
+
+  const homePageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://mkpublicity.com/#webpage',
+    'url': 'https://mkpublicity.com/',
+    'name': 'MK Publicity — Surat\'s #1 Digital Marketing, Strategic PR & IT Solutions Agency',
+    'description': 'Surat\'s #1 rated integrated agency uniting Performance Marketing, Strategic Public Relations (PR), and IT & Software Solutions in Surat, Gujarat. 500+ clients scaled, 300%+ verified ROI.',
+    'isPartOf': {
+      '@id': 'https://mkpublicity.com/#website'
+    },
+    'about': {
+      '@id': 'https://mkpublicity.com/#organization'
+    }
+  };
+
   return (
     <>
-      {/* ═══ HERO ═══ */}
-      <section className="hero" id="hero">
-        <div className="hero-bg"></div>
-        <ParticleBackground />
-        
-        <div className="hero-content" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '4rem', alignItems: 'center' }}>
-          {/* Left Text Column */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.2, delayChildren: 0.3 }
-              }
-            }}
-          >
+      <SEOHead
+        title="MK Publicity — Surat's #1 Digital Marketing, PR & MarTech Agency"
+        description="Surat's #1 rated agency uniting Performance Marketing, Strategic PR, and IT & Software Solutions. 500+ clients scaled, 340% average lead surge, 300%+ verified ROI. Located at Rajmahal Mall, Surat."
+        keywords="Surat's #1 marketing agency, best digital marketing agency in Surat, top PR agency Surat, MK Publicity Surat, performance marketing Surat, MarTech solutions Gujarat, branding agency Surat, web development Surat"
+        canonical="/"
+        jsonLd={[homePageSchema, homeFaqSchema]}
+      />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          1. ULTRA-PREMIUM EDITORIAL HERO
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="editorial-hero" id="hero">
+        <div className="hero-glow-bg" aria-hidden="true"></div>
+
+        <div className="container">
+          <div className="editorial-hero-grid">
+            {/* Left Narrative Column */}
             <motion.div
+              initial="hidden"
+              animate="visible"
               variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+                }
               }}
-              className="hero-badge"
-              style={{ background: 'transparent', border: 'none', padding: 0, fontSize: '0.9rem', letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--primary)', fontWeight: 700 }}
             >
-              Data-Driven Strategies for Explosive Growth
-            </motion.div>
-
-            <motion.h1
-              className="hero-title"
-              style={{ fontSize: 'clamp(3.5rem, 8vw, 6.5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.05, marginBottom: 'var(--space-2xl)' }}
-            >
-              <motion.span 
-                style={{ display: 'block' }}
-                variants={{
-                  hidden: { opacity: 0, y: 40, rotateX: 20 },
-                  visible: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
-                }}
-              >
-                We shape <span className="text-gradient">perception.</span>
-              </motion.span>
-              <motion.span 
-                style={{ display: 'block' }}
-                variants={{
-                  hidden: { opacity: 0, y: 40, rotateX: 20 },
-                  visible: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
-                }}
-              >
-                We drive <span className="text-gradient">growth.</span>
-              </motion.span>
-            </motion.h1>
-
-            <motion.p
-              className="hero-subtitle"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-              }}
-              style={{ fontSize: '1.25rem', maxWidth: '600px', margin: '0 0 var(--space-3xl) 0', color: 'var(--text-secondary)' }}
-            >
-              MK Publicity is a premier full-service PR & marketing agency. We build 
-              unshakable credibility, architect powerful brand narratives, and engineer 
-              data-driven campaigns for industry leaders.
-            </motion.p>
-
-            <motion.div
-              className="hero-actions"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-              }}
-              style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'flex-start' }}
-            >
-              <CTAButton
-                text="Request Needs Analysis"
-                icon={Sparkles}
-                size="lg"
-                onClick={openModal}
-              />
-              <Link to="/portfolio" className="btn btn-secondary btn-lg" style={{ background: 'transparent', border: '1px solid var(--border-medium)', textDecoration: 'none' }}>
-                Explore Case Studies
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Visuals Column */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="hero-visuals"
-            style={{ 
-              position: 'relative', 
-              minHeight: '450px',
-              width: '100%',
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center'
-            }}
-          >
-            <style>
-              {`
-                @keyframes spin-slow { 100% { transform: rotate(360deg); } }
-                @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
-                @media (max-width: 900px) { .hero-visuals { display: none !important; } }
-              `}
-            </style>
-            <div style={{ position: 'relative', width: '100%', maxWidth: '400px', height: '100%' }}>
-              
-              {/* Abstract Glowing Orb */}
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '250px', height: '250px', background: 'var(--primary-subtle)', borderRadius: '50%', filter: 'blur(50px)', zIndex: 0 }}></div>
-              
-              {/* Floating Stat 1 */}
               <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ position: 'absolute', top: '5%', right: '0%', background: '#fff', padding: '1.25rem', borderRadius: '1rem', boxShadow: 'var(--shadow-lg)', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '0.5rem', minWidth: '150px' }}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                }}
+                className="hero-eyebrow-pill"
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary)' }}>
-                  <TrendingUp size={24} />
-                  <span style={{ fontWeight: 800, fontSize: '1.5rem', color: '#000' }}>300%</span>
-                </div>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Avg. ROI Increase</span>
+                <span>🏆 SURAT’S #1 MARKETING, PR & MARTECH AGENCY</span>
               </motion.div>
 
-              {/* Floating Stat 2 */}
-              <motion.div
-                animate={{ y: [0, 15, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                style={{ position: 'absolute', bottom: '10%', left: '-10%', background: '#111', padding: '1.25rem', borderRadius: '1rem', boxShadow: 'var(--shadow-lg)', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '0.5rem', minWidth: '150px' }}
+              <motion.h1
+                className="editorial-hero-title"
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fff' }}>
-                  <Users size={24} />
-                  <span style={{ fontWeight: 800, fontSize: '1.5rem', color: '#fff' }}>500+</span>
-                </div>
-                <span style={{ fontSize: '0.8rem', color: '#999', fontWeight: 600 }}>Clients Scaled</span>
+                <span>Surat’s #1 Marketing & PR Agency</span><br />
+                <em className="serif-em text-gold">for Brands Ready to Dominate.</em>
+              </motion.h1>
+
+              <motion.p
+                className="editorial-hero-lead"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } }
+                }}
+              >
+                Surat's undisputed leader in Performance Marketing, National Public Relations, High-Conversion Web Architecture & MarTech Solutions. Backed by 500+ scaled enterprises across textiles, diamonds, real estate & healthcare, delivering an average 340% verified pipeline growth.
+              </motion.p>
+
+              <motion.div
+                className="hero-action-buttons"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } }
+                }}
+              >
+                <button
+                  type="button"
+                  id="hero-cta-discuss-project"
+                  onClick={() => handleOpenBrief('Integrated Marketing & PR')}
+                  className="btn-gold"
+                  style={{ cursor: 'pointer', position: 'relative', zIndex: 10 }}
+                >
+                  <Sparkles size={18} /> Discuss Your Project
+                </button>
+
+                <Link to="/portfolio" className="btn-editorial-ghost">
+                  Explore Our Work <ArrowRight size={16} />
+                </Link>
               </motion.div>
 
-              {/* Center Abstract Graphic */}
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1, width: '220px', height: '220px', border: '1px solid var(--border-medium)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ width: '160px', height: '160px', border: '2px dashed var(--primary)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'spin-slow 25s linear infinite' }}>
-                  <div style={{ animation: 'spin-reverse 25s linear infinite' }}>
-                    <BarChart size={56} color="var(--primary)" strokeWidth={1.5} />
-                  </div>
-                </div>
-              </div>
+              <motion.div
+                className="hero-proof-chips"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1, transition: { delay: 0.6, duration: 0.6 } }
+                }}
+              >
+                <span className="proof-chip">
+                  <CheckCircle2 size={15} className="text-gold" /> Surat’s #1 Rated Agency (5.0★ Verified)
+                </span>
+                <span className="proof-chip">
+                  <CheckCircle2 size={15} className="text-gold" /> 500+ Scaled Brands & 340% Avg Surge
+                </span>
+                <span className="proof-chip">
+                  <CheckCircle2 size={15} className="text-gold" /> Surat HQ (Rajmahal Mall, Dindoli)
+                </span>
+                <span className="proof-chip">
+                  <CheckCircle2 size={15} className="text-gold" /> In-House Creative, PR & Tech Labs
+                </span>
+              </motion.div>
+            </motion.div>
 
-            </div>
-          </motion.div>
+            {/* Right Live Signal Board */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="hero-signal-col"
+            >
+              <HeroSignalBoard />
+            </motion.div>
+          </div>
         </div>
-        <div style={{ paddingBottom: '100px' }}></div>
-
-
       </section>
 
-      {/* ═══ CLIENT LOGOS MARQUEE ═══ */}
+      {/* ═══════════════════════════════════════════════════════════════
+          2. INFINITE ASTRAL TICKER
+          ═══════════════════════════════════════════════════════════════ */}
+      <TickerMarquee theme="gold" />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          3. VERIFIED CLIENT LOGOS MARQUEE
+          ═══════════════════════════════════════════════════════════════ */}
       <ClientMarquee />
 
-      {/* ═══ STATS ═══ */}
+      {/* ═══════════════════════════════════════════════════════════════
+          4. THE STRATEGIC TRINITY: MARKETING, PR & IT (INTERACTIVE SVG RADAR)
+          ═══════════════════════════════════════════════════════════════ */}
+      <TrinityEcosystem />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          5. THE PROPRIETARY GROWTH FRAMEWORK (THE 4-STAGE MK BLUEPRINT)
+          ═══════════════════════════════════════════════════════════════ */}
+      <GrowthFramework />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          6. STATS BENCHMARK GRID
+          ═══════════════════════════════════════════════════════════════ */}
       <StatsCounter stats={stats} />
 
-      {/* ═══ SERVICES ═══ */}
-      <section className="section" id="services-section">
+      {/* ═══════════════════════════════════════════════════════════════
+          7. ARCHITECTURAL SERVICES GRID (SWEEP-UP HOVER)
+          ═══════════════════════════════════════════════════════════════ */}
+      <ArchitecturalServiceGrid />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          8. DUAL-DIRECTION CATEGORY WALL (TEXTILES, DIAMONDS, REAL ESTATE)
+          ═══════════════════════════════════════════════════════════════ */}
+      <DualIndustryMarquee />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          8B. BRAND PUBLICITY AGENCY SPOTLIGHT (OFFICIAL 10 CORE SERVICES)
+          ═══════════════════════════════════════════════════════════════ */}
+      <BrandPublicitySection showHeader={true} />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          9. STICKY-STACKING CAMPAIGN CASE STUDIES ("STORIES THAT SCALE")
+          ═══════════════════════════════════════════════════════════════ */}
+      <CampaignStack />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          10. REVENUE & PIPELINE FORECASTING CALCULATOR
+          ═══════════════════════════════════════════════════════════════ */}
+      <RevenueCalculator />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          11. CLIENT TESTIMONIALS
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="section theme-light" id="testimonials-section">
         <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <div className="section-label">What We Do</div>
-              <h2 className="section-title">Our Services</h2>
-              <p className="section-subtitle">
-                From performance marketing to event management, we deliver end-to-end
-                solutions that drive measurable business growth.
+          <header className="arch-sec-head">
+            <div className="section-label">Verified Client Endorsements</div>
+            <div className="arch-head-split">
+              <h2 className="display-title">
+                WHAT FOUNDERS SAY ABOUT <em className="serif-em">OUR ROI.</em>
+              </h2>
+              <p className="arch-head-lead">
+                Real feedback from family business founders, corporate directors, and startup leaders who scaled with MK Publicity.
               </p>
             </div>
-          </ScrollReveal>
-
-          <div className="services-grid">
-            {services.map((service, i) => (
-              <ServiceCard key={service.id} service={service} index={i} />
-            ))}
-          </div>
-
-          <ScrollReveal>
-            <div style={{ textAlign: 'center', marginTop: 'var(--space-3xl)' }}>
-              <Link to="/services" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                <Sparkles size={18} /> Explore All Services
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ═══ WHY CHOOSE US ═══ */}
-      <section className="section" id="why-section" style={{ background: 'var(--bg-surface)' }}>
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <div className="section-label">Why MK Publicity</div>
-              <h2 className="section-title">Why Brands Trust Us</h2>
-              <p className="section-subtitle">
-                We combine creativity, strategy, and data to deliver results that matter.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="why-grid">
-            {whyChooseUs.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <ScrollReveal key={i} delay={i * 0.08}>
-                  <div className="why-card">
-                    <div className="why-icon" style={{ display: 'flex', color: 'var(--primary)', marginBottom: 'var(--space-md)' }}>
-                      {Icon && <Icon size={32} strokeWidth={1.5} />}
-                    </div>
-                    <h4>{item.title}</h4>
-                    <p>{item.desc}</p>
-                  </div>
-                </ScrollReveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ PROCESS ═══ */}
-      <section className="section" id="process-section">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <div className="section-label">Our Approach</div>
-              <h2 className="section-title">How We Work</h2>
-              <p className="section-subtitle">
-                A proven 6-step methodology that ensures predictable, measurable results for every client.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <ProcessTimeline steps={processSteps} />
-
-          <ScrollReveal>
-            <div style={{ textAlign: 'center', marginTop: 'var(--space-3xl)' }}>
-              <Link to="/process" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                <Sparkles size={18} /> Learn More About Our Process
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ═══ INDUSTRIES MARQUEE ═══ */}
-      <div className="marquee-section">
-        <div className="marquee-track">
-          {[...industries, ...industries].map((ind, i) => {
-            const Icon = ind.icon;
-            return (
-              <div key={i} className="marquee-item">
-                <span className="marquee-dot"></span>
-                {Icon && <Icon size={24} style={{ marginRight: '10px' }} />} {ind.name}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* ═══ TESTIMONIALS ═══ */}
-      <section className="section" id="testimonials-section">
-        <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <div className="section-label">Client Stories</div>
-              <h2 className="section-title">What Our Clients Say</h2>
-              <p className="section-subtitle">
-                Real results from real businesses. See why 500+ brands trust MK Publicity.
-              </p>
-            </div>
-          </ScrollReveal>
+          </header>
 
           <TestimonialCarousel testimonials={testimonials} />
         </div>
       </section>
 
-      {/* ═══ INDUSTRIES ═══ */}
-      <section className="section" id="industries-section" style={{ background: 'var(--bg-surface)' }}>
+      {/* ═══════════════════════════════════════════════════════════════
+          12. STRATEGIC FAQS & AEO ANSWER CENTER
+          ═══════════════════════════════════════════════════════════════ */}
+      <AEOAnswerSection 
+        title="Knowledge Base & Strategic Pre-Sales FAQs"
+        subtitle="Authoritative answers on performance guarantees, marketing budgets, PR timelines, and IT system integrations."
+      />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          13. HIGH-IMPACT CLOSING BANNER
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="theme-accent cta-banner" id="cta-banner" style={{ padding: 'clamp(4rem, 8vw, 7rem) 0', textAlign: 'center' }}>
         <div className="container">
-          <ScrollReveal>
-            <div className="section-header">
-              <div className="section-label">Industries We Serve</div>
-              <h2 className="section-title">Expertise Across Sectors</h2>
-              <p className="section-subtitle">
-                From manufacturing to tech startups, we've driven growth across 18+ industries.
-              </p>
+          <div style={{ maxWidth: '46rem', margin: '0 auto' }}>
+            <span className="mono-sub" style={{ background: '#000', color: '#F5C518', padding: '4px 12px', borderRadius: '9999px' }}>
+              Q4 / Q1 Partnership Openings
+            </span>
+            <h2 className="display-title" style={{ color: '#070809', margin: '1rem 0 1.25rem 0' }}>
+              YOUR BRAND HAS A STORY. <em className="serif-em">LET’S MAKE IT PROFITABLE.</em>
+            </h2>
+            <p style={{ color: '#222', fontSize: '1.15rem', lineHeight: 1.6, marginBottom: '2rem' }}>
+              Schedule your free 30-minute growth & PR diagnosis. We will audit your current funnel, diagnose pipeline leaks, and show you how to achieve 300%+ ROI with zero vanity fluff.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={() => handleOpenBrief('General Growth Strategy')}
+                className="btn-gold"
+                style={{ background: '#070809', color: '#F5C518', border: '1px solid #070809' }}
+              >
+                <Sparkles size={18} /> Start a Conversation with Our Architect
+              </button>
+              <a
+                href={getWhatsAppLink('Hi! I want to request a free revenue and growth audit for my brand.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-editorial-ghost"
+                style={{ borderColor: '#070809', color: '#070809' }}
+              >
+                Direct WhatsApp Consultation
+              </a>
             </div>
-          </ScrollReveal>
-
-          <IndustryGrid industries={industries} />
-
-          <ScrollReveal>
-            <div style={{ textAlign: 'center', marginTop: 'var(--space-3xl)' }}>
-              <Link to="/industries" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                <Sparkles size={18} /> View All Industries
-              </Link>
-            </div>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
 
-      {/* ═══ CTA BANNER ═══ */}
-      <section className="cta-banner" id="cta-banner">
-        <div className="container">
-          <ScrollReveal>
-            <h2>Ready to Grow Your Brand?</h2>
-            <p>Let's create a marketing strategy that delivers measurable results.</p>
-            <a
-              href={getWhatsAppLink('Hi! I want to transform my brand with MK Publicity.')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-lg"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '12px' }}
-            >
-              <Sparkles size={20} /> Let's Talk on WhatsApp
-            </a>
-          </ScrollReveal>
-        </div>
-      </section>
+      {/* ═══════════════════════════════════════════════════════════════
+          14. INSTANT BRIEF MODAL (NATIVE OVERLAY)
+          ═══════════════════════════════════════════════════════════════ */}
+      <InstantBriefModal
+        isOpen={isBriefModalOpen}
+        onClose={() => setIsBriefModalOpen(false)}
+        initialService={selectedServiceForBrief}
+      />
     </>
   );
 }

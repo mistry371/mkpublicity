@@ -16,6 +16,7 @@ export const quickReplies = {
     'Contact Us'
   ],
   services: [
+    'IT Solutions & MarTech',
     'Performance Marketing',
     'Public Relations',
     'Social Media',
@@ -43,14 +44,50 @@ export const intentPatterns = {
     patterns: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening', 'howdy', 'sup', 'namaste', 'hola', 'greetings', 'yo'],
     responses: [
       "Hello! 😊 Welcome to MK Publicity. How can I help you grow your business today?",
-      "Hi there! 👋 Great to connect with you. Are you looking for marketing, PR, or branding solutions?",
+      "Hi there! 👋 Great to connect with you. Are you looking for marketing, PR, or IT solutions?",
       "Hey! Welcome to MK Publicity — Your Success, Our Mission. What brings you here today?"
     ]
   },
   services_general: {
-    patterns: ['services', 'what do you do', 'what you offer', 'offerings', 'what can you do', 'help me with', 'solutions', 'your work'],
+    patterns: ['services', 'what do you do', 'what you offer', 'offerings', 'what can you do', 'help me with', 'solutions', 'your work', 'brand publicity'],
     responses: [
-      "We offer 11 comprehensive services: 📈 Performance Marketing, 📰 PR & Media, 🎯 Advertising, 📱 Social Media, 🌟 Influencer Marketing, ✍️ Content Writing, 🎨 Branding, 🎬 Video Production, 🌐 Web Design, 🛒 E-Commerce, and 🎪 Event Marketing. Which area interests you?"
+      "MK Publicity is a premier integrated Brand Publicity Agency & Growth Firm offering 17 disciplines across Marketing, PR & IT. Our flagship Brand Publicity services include:\n\n🎤 Press Conference\n🌐 Digital/Online PR\n📺 Media Management\n🎯 Social Media Ads\n✍️ Content Writing\n🎪 Events & Promotions\n📱 Social Media Management\n📈 Advertising\n⭐ Influencer Marketing\n🏆 Award Nominations, Etc.\n\nPlus Custom IT Solutions & Web Engineering. Which area would you like to explore?"
+    ]
+  },
+  press_conference: {
+    patterns: ['press conference', 'press meet', 'media briefing', 'journalist meet', 'press launch', 'media meet'],
+    responses: [
+      "Our Press Conference & Media Briefing services include:\n\n🎤 Turnkey Venue & Stage Curation\n📋 A-List Print, TV & Digital Journalist Bureau Invitations\n📝 Executive Press Release Drafting & Media Kits\n🎙️ Spokesperson Q&A Coaching & Live Media Prep\n📰 Bilingual Gujarati, Hindi & English Regional Press Coordination\n📊 Post-Conference Verified News Clipping Reports\n\nWould you like to schedule a press briefing with our media bureau?"
+    ]
+  },
+  digital_pr: {
+    patterns: ['digital pr', 'online pr', 'backlinks', 'guest post', 'news portal', 'online news', 'editorial', 'domain authority'],
+    responses: [
+      "Our Digital/Online PR services guarantee tier-1 exposure:\n\n🌐 Guaranteed Placements in ANI, HT, Zee, Outlook, India Today\n🔗 High-Authority Do-Follow SEO Backlinks\n👤 Executive Thought Leadership & Founder Profiles\n🛡️ Online Brand Sentiment Management & Search Shielding\n📈 Google News & Discover Optimization\n\nReady to get your brand published in national digital publications?"
+    ]
+  },
+  media_management: {
+    patterns: ['media management', 'media bureau', 'spokesperson', 'press relations', 'media pitching', 'crisis defense'],
+    responses: [
+      "Our Media Management & Press Relations include:\n\n📺 Dedicated External Corporate Press Office\n🎯 Proactive Editorial Pitching to Senior Editors\n🎙️ Executive Commentary in Breaking Industry Stories\n🛡️ 24/7 Rapid-Response Crisis Media Defense\n📑 Bilingual Press Release Syndication\n\nWe keep your brand commanding headlines all year round. Need continuous press representation?"
+    ]
+  },
+  social_media_ads: {
+    patterns: ['social media ads', 'instagram ads', 'meta ads', 'facebook ads', 'paid social', 'reels ads', 'youtube ads'],
+    responses: [
+      "Our Social Media Ads scaling engine covers:\n\n📱 Instagram Reels & Story Sponsored Ads\n💼 High-Ticket B2B LinkedIn Lead Generation\n▶️ YouTube Video Commercial & Shorts Ads\n🔄 Dynamic Audience Retargeting Funnels\n💬 Direct WhatsApp Business Lead Routing\n\nWe consistently drop CAC by up to 50%! Want a free paid ads audit?"
+    ]
+  },
+  award_nominations: {
+    patterns: ['award', 'awards', 'award nomination', 'business award', 'accreditation', 'honors', 'trophy', 'recognition'],
+    responses: [
+      "Our Award Nominations & Industry Accreditations service:\n\n🏆 High-Impact National & Industry Business Award Curation\n📊 Data-Driven Case Study & Growth Dossier Drafting\n👤 Founder Profile Curation for Selection Juries\n🤝 Direct Liaison with Trade Committees (CII, FICCI, ET, Forbes)\n🎉 Post-Victory Victory PR & Social Amplification\n\nWould you like to nominate your company or leadership for upcoming prestigious awards?"
+    ]
+  },
+  it_solutions: {
+    patterns: ['it', 'software', 'technology', 'it solutions', 'martech', 'custom software', 'app development', 'crm', 'cloud', 'automation', 'api', 'tech'],
+    responses: [
+      "Our IT Solutions & MarTech Systems cover:\n\n💻 Custom Web & App Development\n⚡ MarTech & CRM Integrations\n🤖 AI Marketing Automations & Telemetry\n☁️ Cloud Infrastructure & Sub-second Performance\n📊 Conversion-Optimized Architecture\n🔒 Security & Technical SEO\n\nWe bridge IT engineering with PR & marketing to scale enterprise value. Want to discuss your technical requirements?"
     ]
   },
   performance_marketing: {

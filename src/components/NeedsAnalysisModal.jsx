@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { X, Send, ArrowLeft, CheckCircle2, Sparkles } from 'lucide-react';
 import { services, getWhatsAppLink } from '../data';
+import { trackConversionEvent } from '../utils/analytics';
 
 const slideVariants = {
   enter: (direction) => ({
-    x: direction > 0 ? 50 : -50,
+    x: direction > 0 ? 40 : -40,
     opacity: 0
   }),
   center: {
@@ -15,45 +16,74 @@ const slideVariants = {
   },
   exit: (direction) => ({
     zIndex: 0,
-    x: direction < 0 ? 50 : -50,
+    x: direction < 0 ? 40 : -40,
     opacity: 0
   })
 };
 
 const timelines = ['ASAP', '1-3 Months', '3-6 Months', 'Flexible'];
-const budgets = ['Under ₹50k', '₹50k - ₹1L', '₹1L - ₹5L', '₹5L+'];
+const budgets = ['₹50k - ₹1L', '₹1L - ₹3L', '₹3L - ₹8L', '₹8L+ / Performance'];
 
-export default function NeedsAnalysisModal({ isOpen, onClose }) {
+export default function NeedsAnalysisModal({ isOpen, onClose, initialService = '' }) {
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(0);
   const [formData, setFormData] = useState({
     category: '',
     specificService: '',
-    timeline: '',
-    budget: '',
+    timeline: 'ASAP',
+    budget: '₹1L - ₹3L',
     name: '',
     company: '',
     contact: '',
     details: ''
   });
 
-  // Reset state when modal opens
   useEffect(() => {
     if (isOpen) {
-      setStep(1);
-      setDirection(0);
-      setFormData({
-        category: '',
-        specificService: '',
-        timeline: '',
-        budget: '',
-        name: '',
-        company: '',
-        contact: '',
-        details: ''
-      });
+      if (initialService) {
+        // Try to match initialService with existing catalog
+        const match = services.find(s => 
+          s.id.toLowerCase() === initialService.toLowerCase() ||
+          s.title.toLowerCase().includes(initialService.toLowerCase()) ||
+          initialService.toLowerCase().includes(s.title.toLowerCase())
+        );
+
+        if (match) {
+          setFormData(prev => ({
+            ...prev,
+            category: match.title,
+            specificService: match.includes?.[0] || 'Strategic Consultation'
+          }));
+          setStep(2);
+        } else {
+          setFormData(prev => ({
+            ...prev,
+            category: initialService,
+            specificService: 'Comprehensive Strategy'
+          }));
+          setStep(2);
+        }
+      } else {
+        setStep(1);
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, initialService]);
+
+  const handleClose = () => {
+    setStep(1);
+    setDirection(0);
+    setFormData({
+      category: '',
+      specificService: '',
+      timeline: 'ASAP',
+      budget: '₹1L - ₹3L',
+      name: '',
+      company: '',
+      contact: '',
+      details: ''
+    });
+    onClose();
+  };
 
   const paginate = (newDirection) => {
     setDirection(newDirection);
@@ -63,7 +93,6 @@ export default function NeedsAnalysisModal({ isOpen, onClose }) {
   const handleSelect = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (field === 'category') {
-      // Reset specific service when category changes
       setFormData(prev => ({ ...prev, specificService: '' }));
       paginate(1);
     } else if (field === 'specificService') {
@@ -79,26 +108,34 @@ export default function NeedsAnalysisModal({ isOpen, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    const message = `*🎯 NEW PROJECT INQUIRY*
+    trackConversionEvent('form_submit_success', {
+      category: formData.category,
+      specificService: formData.specificService,
+      timeline: formData.timeline,
+      budget: formData.budget
+    });
+    trackConversionEvent('whatsapp_click', { source: 'needs_analysis_modal' });
+
+    const message = `*🎯 NEW PROJECT INQUIRY FOR MK PUBLICITY*
 
 *Client Details:*
 👤 Name: ${formData.name}
-🏢 Company: ${formData.company || 'N/A'}
+🏢 Company: ${formData.company || 'Not Specified'}
 📞 Contact: ${formData.contact}
 
 *Project Scope:*
-📂 Category: ${formData.category}
-🔧 Specific Service: ${formData.specificService}
+📂 Category: ${formData.category || 'Strategic Growth Audit'}
+🔧 Specific Need: ${formData.specificService || 'General Assessment'}
 ⏱️ Timeline: ${formData.timeline}
-💰 Budget: ${formData.budget}
+💰 Monthly Budget: ${formData.budget}
 
-*Additional Details:*
-${formData.details || 'None provided'}
+*Goals & Notes:*
+${formData.details || 'Interested in scheduling a revenue & marketing consultation.'}
 
-I would like to schedule a consultation.`;
+_Sent via mkpublicity.com Diagnostic Wizard_`;
 
-    window.open(getWhatsAppLink(message), '_blank');
-    onClose();
+    window.open(getWhatsAppLink(message), '_blank', 'noopener,noreferrer');
+    handleClose();
   };
 
   const selectedCategoryData = services.find(s => s.title === formData.category);
@@ -112,31 +149,52 @@ I would like to schedule a consultation.`;
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="modal-backdrop"
-            onClick={onClose}
+            onClick={handleClose}
           />
-          <div className="modal-wrapper">
+          <div className="modal-wrapper" onClick={handleClose}>
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="modal-content wizard-content"
+              onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="wizard-modal-title"
             >
-              <button className="modal-close" onClick={onClose} aria-label="Close modal">
-                <X size={24} />
+              <button 
+                type="button"
+                className="modal-close" 
+                onClick={handleClose} 
+                aria-label="Close modal"
+              >
+                <X size={20} />
               </button>
 
               {/* Header & Progress */}
               <div className="wizard-header">
-                {step > 1 && (
-                  <button className="wizard-back-btn" onClick={() => paginate(-1)}>
-                    <ArrowLeft size={18} /> Back
-                  </button>
-                )}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  {step > 1 ? (
+                    <button 
+                      type="button" 
+                      className="wizard-back-btn" 
+                      onClick={() => paginate(-1)}
+                    >
+                      <ArrowLeft size={16} /> Back
+                    </button>
+                  ) : (
+                    <span className="mono-sub text-gold" style={{ fontSize: '0.75rem' }}>
+                      Diagnostic Assessment // Free Consultation
+                    </span>
+                  )}
+                  <span className="progress-text mono-sub">Step {step} of 4</span>
+                </div>
+                
                 <div className="wizard-progress">
                   <div className="progress-bar">
                     <div className="progress-fill" style={{ width: `${(step / 4) * 100}%` }}></div>
                   </div>
-                  <span className="progress-text">Step {step} of 4</span>
                 </div>
               </div>
 
@@ -152,12 +210,40 @@ I would like to schedule a consultation.`;
                       initial="enter"
                       animate="center"
                       exit="exit"
-                      transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+                      transition={{ type: "tween", ease: "easeInOut", duration: 0.25 }}
                       className="wizard-step"
                     >
-                      <h2>What are you looking for?</h2>
-                      <p className="wizard-subtitle">Select a category to get started.</p>
+                      <h2 id="wizard-modal-title">What are you looking to scale?</h2>
+                      <p className="wizard-subtitle">Select a core discipline or request a full strategic growth audit.</p>
                       
+                      {/* Anchor option for custom growth roadmap */}
+                      <button
+                        type="button"
+                        className={`selection-card selection-card--hero ${formData.category === 'Full Strategic Growth Audit & Roadmap' ? 'active' : ''}`}
+                        onClick={() => handleSelect('category', 'Full Strategic Growth Audit & Roadmap')}
+                        style={{
+                          marginBottom: '1rem',
+                          background: 'linear-gradient(135deg, rgba(245, 197, 24, 0.12) 0%, rgba(245, 197, 24, 0.03) 100%)',
+                          border: '1px solid rgba(245, 197, 24, 0.35)',
+                          width: '100%'
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                          <div className="selection-icon" style={{ background: '#F5C518', color: '#070809' }}>
+                            <Sparkles size={20} />
+                          </div>
+                          <div>
+                            <h3 style={{ margin: 0, fontSize: '1.05rem', color: '#0C0D0E' }}>
+                              Full Strategic Growth & Revenue Audit (Recommended)
+                            </h3>
+                            <p style={{ margin: '2px 0 0 0', fontSize: '0.82rem', color: '#555555' }}>
+                              Unite Performance Marketing, Strategic PR & MarTech into a 90-day blueprint.
+                            </p>
+                          </div>
+                        </div>
+                        {formData.category === 'Full Strategic Growth Audit & Roadmap' && <CheckCircle2 className="active-check" size={20} />}
+                      </button>
+
                       <div className="selection-grid">
                         {services.map(service => {
                           const Icon = service.icon;
@@ -165,12 +251,15 @@ I would like to schedule a consultation.`;
                           return (
                             <button
                               key={service.id}
+                              type="button"
                               className={`selection-card ${isActive ? 'active' : ''}`}
                               onClick={() => handleSelect('category', service.title)}
                             >
-                              <Icon size={32} className="selection-icon" style={{ color: service.color }} />
-                              <h3>{service.title}</h3>
-                              {isActive && <CheckCircle2 className="active-check" size={20} />}
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%' }}>
+                                <Icon size={20} className="selection-icon" style={{ color: service.color || '#B8860B', flexShrink: 0 }} />
+                                <h3 style={{ fontSize: '0.92rem', lineHeight: 1.3, margin: 0 }}>{service.title}</h3>
+                              </div>
+                              {isActive && <CheckCircle2 className="active-check" size={18} />}
                             </button>
                           );
                         })}
@@ -186,32 +275,40 @@ I would like to schedule a consultation.`;
                       initial="enter"
                       animate="center"
                       exit="exit"
-                      transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+                      transition={{ type: "tween", ease: "easeInOut", duration: 0.25 }}
                       className="wizard-step"
                     >
-                      <h2>Select Specific Service</h2>
-                      <p className="wizard-subtitle">Which area of {formData.category} do you need help with?</p>
+                      <h2>Select Specific Deliverable</h2>
+                      <p className="wizard-subtitle">Which area of <strong>{formData.category}</strong> is your primary focus?</p>
                       
                       <div className="selection-list">
-                        {selectedCategoryData?.includes.map((item, idx) => {
+                        {(selectedCategoryData?.includes || [
+                          'Complete Strategic Audit & Execution Blueprint',
+                          'Multi-Channel Inbound Funnel Deployment',
+                          'High-Authority PR & National Media Placements',
+                          'Custom CRM Pipeline & Lead Routing Automation',
+                          'Brand Identity, Creative Direction & Video Assets'
+                        ]).map((item, idx) => {
                           const isActive = formData.specificService === item;
                           return (
                             <button
                               key={idx}
+                              type="button"
                               className={`selection-list-item ${isActive ? 'active' : ''}`}
                               onClick={() => handleSelect('specificService', item)}
                             >
                               <span>{item}</span>
-                              {isActive && <CheckCircle2 className="active-check" size={20} />}
+                              {isActive && <CheckCircle2 className="active-check text-gold" size={18} />}
                             </button>
                           );
                         })}
                         <button
-                          className={`selection-list-item ${formData.specificService === 'Other / Unsure' ? 'active' : ''}`}
-                          onClick={() => handleSelect('specificService', 'Other / Unsure')}
+                          type="button"
+                          className={`selection-list-item ${formData.specificService === 'Other / Comprehensive Strategy' ? 'active' : ''}`}
+                          onClick={() => handleSelect('specificService', 'Other / Comprehensive Strategy')}
                         >
-                          <span>Other / Unsure</span>
-                          {formData.specificService === 'Other / Unsure' && <CheckCircle2 className="active-check" size={20} />}
+                          <span>Other / Comprehensive Strategy</span>
+                          {formData.specificService === 'Other / Comprehensive Strategy' && <CheckCircle2 className="active-check text-gold" size={18} />}
                         </button>
                       </div>
                     </motion.div>
@@ -225,18 +322,21 @@ I would like to schedule a consultation.`;
                       initial="enter"
                       animate="center"
                       exit="exit"
-                      transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+                      transition={{ type: "tween", ease: "easeInOut", duration: 0.25 }}
                       className="wizard-step"
                     >
-                      <h2>Project Scope</h2>
-                      <p className="wizard-subtitle">Help us understand the timeline and budget.</p>
+                      <h2>Project Scope & Budget</h2>
+                      <p className="wizard-subtitle">Help us calibrate the execution team and strategy timeline.</p>
                       
                       <div className="form-group mb-4">
-                        <label>Timeline</label>
+                        <label className="mono-sub" style={{ fontSize: '0.8rem', color: '#555555', display: 'block', marginBottom: '8px' }}>
+                          Target Deployment Timeline
+                        </label>
                         <div className="pill-group">
                           {timelines.map(t => (
                             <button
                               key={t}
+                              type="button"
                               className={`pill-btn ${formData.timeline === t ? 'active' : ''}`}
                               onClick={() => setFormData(prev => ({ ...prev, timeline: t }))}
                             >
@@ -246,12 +346,15 @@ I would like to schedule a consultation.`;
                         </div>
                       </div>
 
-                      <div className="form-group mb-4" style={{ marginTop: 'var(--space-lg)' }}>
-                        <label>Estimated Budget</label>
+                      <div className="form-group mb-4" style={{ marginTop: '1.5rem' }}>
+                        <label className="mono-sub" style={{ fontSize: '0.8rem', color: '#555555', display: 'block', marginBottom: '8px' }}>
+                          Planned Monthly Growth Investment
+                        </label>
                         <div className="pill-group">
                           {budgets.map(b => (
                             <button
                               key={b}
+                              type="button"
                               className={`pill-btn ${formData.budget === b ? 'active' : ''}`}
                               onClick={() => setFormData(prev => ({ ...prev, budget: b }))}
                             >
@@ -261,14 +364,13 @@ I would like to schedule a consultation.`;
                         </div>
                       </div>
 
-                      <div style={{ marginTop: 'var(--space-2xl)' }}>
+                      <div style={{ marginTop: '2rem' }}>
                         <button 
-                          className="btn btn-primary" 
+                          type="button"
+                          className="btn btn-gold modal-submit-btn" 
                           onClick={() => paginate(1)}
-                          disabled={!formData.timeline || !formData.budget}
-                          style={{ width: '100%', padding: '16px' }}
                         >
-                          Continue →
+                          Continue to Final Step →
                         </button>
                       </div>
                     </motion.div>
@@ -282,38 +384,72 @@ I would like to schedule a consultation.`;
                       initial="enter"
                       animate="center"
                       exit="exit"
-                      transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+                      transition={{ type: "tween", ease: "easeInOut", duration: 0.25 }}
                       className="wizard-step"
                     >
-                      <h2>Almost done!</h2>
-                      <p className="wizard-subtitle">Tell us how to reach you.</p>
+                      <h2>Almost Done!</h2>
+                      <p className="wizard-subtitle">Where should our growth architect send your diagnostic brief?</p>
                       
                       <form onSubmit={handleSubmit} className="modal-form">
                         <div className="form-row">
                           <div className="form-group">
-                            <label htmlFor="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required placeholder="Jane Doe" value={formData.name} onChange={handleInputChange} />
+                            <label htmlFor="modal-name">Your Full Name *</label>
+                            <input 
+                              type="text" 
+                              id="modal-name" 
+                              name="name" 
+                              required 
+                              placeholder="e.g. Rajesh Shah" 
+                              value={formData.name} 
+                              onChange={handleInputChange} 
+                            />
                           </div>
                           <div className="form-group">
-                            <label htmlFor="company">Company Name</label>
-                            <input type="text" id="company" name="company" placeholder="Acme Corp" value={formData.company} onChange={handleInputChange} />
+                            <label htmlFor="modal-company">Brand / Company Name</label>
+                            <input 
+                              type="text" 
+                              id="modal-company" 
+                              name="company" 
+                              placeholder="e.g. Surat Enterprise" 
+                              value={formData.company} 
+                              onChange={handleInputChange} 
+                            />
                           </div>
                         </div>
 
                         <div className="form-group">
-                          <label htmlFor="contact">Email or Phone Number *</label>
-                          <input type="text" id="contact" name="contact" required placeholder="jane@example.com or +91..." value={formData.contact} onChange={handleInputChange} />
+                          <label htmlFor="modal-contact">Phone or WhatsApp Number *</label>
+                          <input 
+                            type="text" 
+                            id="modal-contact" 
+                            name="contact" 
+                            required 
+                            placeholder="+91 95372 95599" 
+                            value={formData.contact} 
+                            onChange={handleInputChange} 
+                          />
                         </div>
 
                         <div className="form-group">
-                          <label htmlFor="details">Additional Details (Optional)</label>
-                          <textarea id="details" name="details" rows="3" placeholder="Tell us more about your goals..." value={formData.details} onChange={handleInputChange}></textarea>
+                          <label htmlFor="modal-details">Current Bottleneck or Goal (Optional)</label>
+                          <textarea 
+                            id="modal-details" 
+                            name="details" 
+                            rows={3} 
+                            placeholder="Tell us what you want to achieve or where your leads are leaking..." 
+                            value={formData.details} 
+                            onChange={handleInputChange}
+                          />
                         </div>
 
-                        <button type="submit" className="btn btn-primary modal-submit-btn">
-                          <span>Submit to WhatsApp</span>
+                        <button type="submit" className="btn btn-gold modal-submit-btn">
+                          <span>Continue Consultation on WhatsApp</span>
                           <Send size={18} />
                         </button>
+                        
+                        <span className="mono-sub" style={{ fontSize: '0.75rem', color: '#777777', textAlign: 'center', display: 'block', marginTop: '6px' }}>
+                          🔒 100% Confidential • Immediate WhatsApp Dispatch
+                        </span>
                       </form>
                     </motion.div>
                   )}

@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ChatMessage from './ChatMessage';
 import chatEngine from './ChatEngine';
-import { getWhatsAppLink, PHONE } from '../../data';
 import { useModal } from '../../context/ModalContext';
 
 export default function ChatWidget() {
@@ -15,6 +14,7 @@ export default function ChatWidget() {
   const [hasUnread, setHasUnread] = useState(true);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const hasGreetedRef = useRef(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -23,10 +23,9 @@ export default function ChatWidget() {
   useEffect(scrollToBottom, [messages, isTyping]);
 
   useEffect(() => {
-    if (isOpen && messages.length === 0) {
-      // Initial greeting with slight delay for natural feel
-      setIsTyping(true);
-      setTimeout(() => {
+    if (isOpen && !hasGreetedRef.current) {
+      hasGreetedRef.current = true;
+      const timer = setTimeout(() => {
         const greeting = chatEngine.getGreeting();
         setMessages([{
           role: 'bot',
@@ -34,14 +33,25 @@ export default function ChatWidget() {
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }]);
         setSuggestions(greeting.suggestions);
-        setIsTyping(false);
-      }, 800);
-    }
-    if (isOpen) {
-      setHasUnread(false);
-      setTimeout(() => inputRef.current?.focus(), 300);
+      }, 500);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => inputRef.current?.focus(), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
+  const toggleOpen = () => {
+    setIsOpen(prev => {
+      const next = !prev;
+      if (next) setHasUnread(false);
+      return next;
+    });
+  };
 
   const sendMessage = (text) => {
     if (!text.trim()) return;
@@ -89,7 +99,7 @@ export default function ChatWidget() {
       {/* Floating Trigger Button */}
       <motion.div
         className="chat-widget-trigger"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleOpen}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         id="chat-trigger"

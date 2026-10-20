@@ -1,1615 +1,428 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  ArrowDownRight,
-  ArrowRight,
-  ArrowUpRight,
-  BarChart3,
   Compass,
-  Globe2,
-  Handshake,
-  Lightbulb,
-  MoveUpRight,
-  Quote,
-  ShieldCheck,
-  Sparkles,
   Target,
-  Trophy,
-  Users,
+  Lightbulb,
+  BarChart3,
+  ArrowRight,
+  Sparkles,
+  Quote,
+  MessageCircle
 } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
-import { stats } from '../data';
-import { useModal } from '../context/ModalContext';
+import SEOHead from '../components/SEOHead';
+import InstantBriefModal from '../components/InstantBriefModal';
+import { stats, getWhatsAppLink } from '../data';
+import { trackConversionEvent } from '../utils/analytics';
 
 const principles = [
   {
     index: '01',
     icon: Compass,
-    title: 'Clarity',
-    text: 'We turn complexity into a clear direction, so every decision has a purpose and every move has momentum.',
+    title: 'Clarity Over Noise',
+    text: 'We turn complexity into unambiguous commercial direction. Every rupee deployed has a verified role; every message serves a quantifiable purpose.',
   },
   {
     index: '02',
     icon: Target,
-    title: 'Precision',
-    text: 'Strategy is only valuable when it translates into focused execution, measurable progress and commercial outcomes.',
+    title: 'Precision Execution',
+    text: 'Strategy is worthless without high-speed execution. We engineer disciplined ad funnels, tier-1 media syndication, and high-velocity web architectures.',
   },
   {
     index: '03',
     icon: Lightbulb,
-    title: 'Perspective',
-    text: 'We challenge assumptions, find the opportunity others miss and build ideas designed for the world ahead.',
+    title: 'Strategic Perspective',
+    text: 'We challenge conventional local agency playbooks. We find the high-margin market positioning and audience cohorts competitors overlook.',
   },
   {
     index: '04',
     icon: BarChart3,
-    title: 'Performance',
-    text: 'Creative thinking is paired with data, disciplined optimisation and an obsession with meaningful results.',
+    title: 'Compound Attribution',
+    text: 'We reject vanity metrics. We measure client success in qualified inbound sales pipeline, lowered customer acquisition costs, and brand equity.',
   },
 ];
 
 const values = [
-  ['Mission-Driven', 'Every strategy starts with the business goal.'],
-  ['Innovation First', 'We explore what is next—not only what is popular.'],
-  ['Partnership', 'We work as an extension of your leadership team.'],
-  ['Data-Informed', 'Decisions are strengthened by evidence and insight.'],
-  ['Excellence', 'Details matter because perception is built from them.'],
-  ['Sustainable', 'We prefer compounding value over temporary attention.'],
+  { title: 'Mission-Driven Architecture', text: 'Every ad campaign, press release, and web deploy directly targets your commercial P&L.' },
+  { title: 'Innovation Over Mimicry', text: 'We explore algorithmic ad features and AEO search paradigms before competitors know they exist.' },
+  { title: 'Executive Partnership', text: 'We operate as an embedded digital growth arm to your executive team, not an aloof outside vendor.' },
+  { title: 'Evidence-Based Attribution', text: 'Decisions are driven by server-side CAPI telemetry, analytics cohorts, and verifiable market demand.' },
+  { title: 'Obsessive Quality Standards', text: 'Flawless typography, sub-second web load times, 4K production, and pristine media positioning.' },
+  { title: 'Long-Term Equity Value', text: 'We build compounding brand authority that continues driving inbound enterprise deals for years.' }
 ];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-  },
-};
 
 const imagePath = '/assets/mehul-desai.jpg';
 
 export default function About() {
-  const { openModal } = useModal();
+  const [isBriefModalOpen, setIsBriefModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const aboutPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': 'https://mkpublicity.com/about#webpage',
+    'url': 'https://mkpublicity.com/about',
+    'name': 'About MK Publicity — Vision, Leadership & Engineering Excellence',
+    'description': 'Learn how MK Publicity unites Strategic Public Relations, Performance Marketing, and IT Engineering. Founded by Mehul Desai in Surat.',
+    'isPartOf': {
+      '@id': 'https://mkpublicity.com/#website'
+    },
+    'about': {
+      '@id': 'https://mkpublicity.com/#organization'
+    }
+  };
+
   return (
-    <>
-      <div className="about-page">
-        {/* =========================================================
-            01 — HERO
-        ========================================================= */}
-        <section className="about-hero">
-          <div className="about-noise" />
-          <div className="about-hero-glow about-hero-glow-a" />
-          <div className="about-hero-glow about-hero-glow-b" />
+    <div style={{ background: '#FBFBFA', color: '#0C0D0E', minHeight: '100vh' }}>
+      <SEOHead
+        title="About Us — MK Publicity | Marketing, PR & IT Leadership"
+        description="Learn how MK Publicity unites Strategic Public Relations, Performance Marketing, and IT Engineering. Founded by Mehul Desai to build dominating brands in Surat and across India."
+        keywords="about MK Publicity, Mehul Desai, marketing agency Surat, PR agency Gujarat, IT MarTech firm, branding leadership, advertising agency founders"
+        canonical="/about"
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'About Us', url: '/about' }
+        ]}
+        jsonLd={aboutPageSchema}
+      />
 
-          <div className="about-shell about-hero-grid">
+      <InstantBriefModal
+        isOpen={isBriefModalOpen}
+        onClose={() => setIsBriefModalOpen(false)}
+      />
+
+      {/* ═══ 1. EDITORIAL HERO ═══ */}
+      <section className="editorial-hero" style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
+        <div className="hero-glow-bg" />
+        
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3.5rem' }} className="about-hero-editorial-grid">
+            
+            {/* Left Copy */}
             <motion.div
-              className="about-hero-copy"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                visible: {
-                  transition: { staggerChildren: 0.1 },
-                },
-              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              <motion.div className="about-eyebrow about-eyebrow-dark" variants={fadeUp}>
-                <span className="about-eyebrow-line" />
-                About the company
-              </motion.div>
-
-              <motion.h1 variants={fadeUp}>
-                Built with
-                <br />
-                <span>intention.</span>
-              </motion.h1>
-
-              <motion.p variants={fadeUp}>
-                We combine strategic thinking, creative excellence and disciplined
-                execution to help ambitious businesses move from where they are
-                to where they should be.
-              </motion.p>
-
-              <motion.div className="about-hero-actions" variants={fadeUp}>
-                <button className="about-primary-button" onClick={openModal}>
-                  Start a conversation
-                  <ArrowUpRight size={18} />
-                </button>
-
-                <a href="#founder" className="about-ghost-button">
-                  Meet the founder
-                  <ArrowDownRight size={18} />
-                </a>
-              </motion.div>
-
-              <motion.div className="about-hero-caption" variants={fadeUp}>
-                <span>Founded in Surat</span>
-                <span className="about-caption-dot" />
-                <span>Built for global ambition</span>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              className="about-hero-visual"
-              initial={{ opacity: 0, scale: 0.97, x: 28 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="about-hero-image-frame">
-                <img
-                  src={imagePath}
-                  alt="Mehul Desai, Founder & CEO"
-                />
-                <div className="about-hero-image-shade" />
-                <div className="about-hero-image-label">
-                  <span>FOUNDER / CEO</span>
-                  <strong>Mehul Desai</strong>
-                </div>
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 14px',
+                background: 'rgba(245, 197, 24, 0.15)',
+                border: '1px solid rgba(184, 134, 11, 0.3)',
+                borderRadius: '100px',
+                marginBottom: '1.25rem'
+              }}>
+                <span style={{ color: '#B8860B' }}>✺</span>
+                <span className="mono-sub" style={{ color: '#B8860B', fontWeight: 600 }}>
+                  THE AGENCY MANIFESTO // SURAT ORIGIN
+                </span>
               </div>
 
-              <div className="about-hero-orbit orbit-a" />
-              <div className="about-hero-orbit orbit-b" />
+              <h1 className="display-title" style={{ fontSize: 'clamp(2.4rem, 5.5vw, 4.4rem)', lineHeight: 1.02, marginBottom: '1.5rem', color: '#0C0D0E' }}>
+                Built With <span className="serif-em text-gold">Intention.</span> <br/>
+                Engineered For Scale.
+              </h1>
 
-              <div className="about-floating-card about-floating-card-top">
-                <Sparkles size={15} />
-                <span>Strategic thinking</span>
-              </div>
-
-              <div className="about-floating-card about-floating-card-bottom">
-                <span className="about-card-number">500+</span>
-                <span className="about-card-label">Brands & businesses</span>
-              </div>
-            </motion.div>
-          </div>
-
-          <a href="#metrics" className="about-scroll-cue" aria-label="Scroll to explore">
-            <span>Scroll to explore</span>
-            <ArrowDownRight size={18} />
-          </a>
-        </section>
-
-        {/* =========================================================
-            03 — METRICS
-        ========================================================= */}
-        <section id="metrics" className="about-metrics">
-          <div className="about-shell">
-            <div className="about-section-topline about-section-topline-light">
-              <span>02 — The scale</span>
-              <span>Measured in trust, reach & momentum</span>
-            </div>
-
-            <div className="about-metrics-grid">
-              {stats.map((stat, idx) => (
-                <ScrollReveal key={idx} delay={idx * 0.08}>
-                  <div className="about-metric">
-                    <div className="about-metric-index">0{idx + 1}</div>
-                    <div className="about-metric-value">
-                      {stat.number}
-                      {stat.suffix}
-                    </div>
-                    <div className="about-metric-label">{stat.label}</div>
-                  </div>
-                </ScrollReveal>
-              ))}
-
-              <ScrollReveal delay={0.3}>
-                <div className="about-metric about-metric-featured">
-                  <div className="about-metric-icon">
-                    <Globe2 size={24} />
-                  </div>
-                  <div className="about-metric-feature-text">
-                    <strong>Global ambition.</strong>
-                    <span>Local roots. Long-term thinking.</span>
-                  </div>
-                </div>
-              </ScrollReveal>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================
-            04 — FOUNDER
-        ========================================================= */}
-        <section id="founder" className="about-founder">
-          <div className="about-shell">
-            <div className="about-section-topline">
-              <span>03 — The founder</span>
-              <span>Leadership / Vision / Standards</span>
-            </div>
-
-            <div className="about-founder-grid">
-              <ScrollReveal>
-                <div className="about-founder-photo-wrap">
-                  <div className="about-founder-photo">
-                    <img
-                      src={imagePath}
-                      alt="Mehul Desai — Founder & CEO"
-                    />
-                  </div>
-
-                  <div className="about-founder-photo-meta">
-                    <span>Founder & CEO</span>
-                    <span>MK Publicity</span>
-                  </div>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={0.12}>
-                <div className="about-founder-copy">
-                  <div className="about-eyebrow">
-                    <span className="about-eyebrow-line" />
-                    Leadership with intent
-                  </div>
-
-                  <h2>
-                    Mehul
-                    <br />
-                    <span>Desai.</span>
-                  </h2>
-
-                  <div className="about-founder-role">Founder & CEO</div>
-
-                  <blockquote>
-                    <Quote size={28} />
-                    <p>
-                      “The objective is not simply to grow faster. It is to build
-                      something valuable enough to keep growing.”
-                    </p>
-                  </blockquote>
-
-                  <p className="about-founder-body">
-                    Under his leadership, MK Publicity has evolved from a bold
-                    concept into a digital growth partner for ambitious
-                    businesses. His approach combines a strategic mindset with
-                    an uncompromising standard for execution.
-                  </p>
-
-                  <div className="about-founder-points">
-                    <div>
-                      <ShieldCheck size={18} />
-                      <span>Long-term value over short-term noise</span>
-                    </div>
-                    <div>
-                      <Users size={18} />
-                      <span>Partnership over vendor relationships</span>
-                    </div>
-                    <div>
-                      <Trophy size={18} />
-                      <span>High standards at every layer</span>
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================
-            05 — PRINCIPLES
-        ========================================================= */}
-        <section className="about-principles">
-          <div className="about-shell">
-            <div className="about-principles-intro">
-              <ScrollReveal>
-                <div>
-                  <div className="about-section-topline">
-                    <span>04 — How we think</span>
-                    <span>Principles before process</span>
-                  </div>
-
-                  <div className="about-eyebrow">
-                    <span className="about-eyebrow-line" />
-                    Our operating philosophy
-                  </div>
-
-                  <h2 className="about-display-heading">
-                    Strategy is not a
-                    <br />
-                    <em>presentation.</em>
-                  </h2>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={0.12}>
-                <p className="about-principles-lead">
-                  It is the quality of the decisions that happen after the room
-                  goes quiet. That is why our approach is built around four
-                  principles designed to keep businesses moving with confidence.
-                </p>
-              </ScrollReveal>
-            </div>
-
-            <div className="about-principles-grid">
-              {principles.map((item, index) => {
-                const Icon = item.icon;
-
-                return (
-                  <motion.article
-                    key={item.index}
-                    className="about-principle-card"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.25 }}
-                    transition={{
-                      delay: index * 0.08,
-                      duration: 0.65,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    whileHover={{ y: -6 }}
-                  >
-                    <div className="about-principle-top">
-                      <span>{item.index}</span>
-                      <Icon size={20} />
-                    </div>
-
-                    <h3>{item.title}</h3>
-                    <p>{item.text}</p>
-
-                    <div className="about-principle-arrow">
-                      <MoveUpRight size={17} />
-                    </div>
-                  </motion.article>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================
-            06 — VALUES
-        ========================================================= */}
-        <section className="about-values">
-          <div className="about-shell">
-            <div className="about-section-topline">
-              <span>05 — What we believe</span>
-              <span>Six standards we do not compromise</span>
-            </div>
-
-            <div className="about-values-heading">
-              <ScrollReveal>
-                <h2>
-                  Standards create
-                  <br />
-                  <span>reputation.</span>
-                </h2>
-              </ScrollReveal>
-
-              <ScrollReveal delay={0.12}>
-                <p>
-                  Culture becomes visible in the work. These principles shape the
-                  way we think, communicate, create and deliver.
-                </p>
-              </ScrollReveal>
-            </div>
-
-            <div className="about-values-grid">
-              {values.map(([title, text], index) => (
-                <ScrollReveal key={title} delay={index * 0.05}>
-                  <div className="about-value-card">
-                    <span className="about-value-number">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================
-            07 — CLOSING CTA
-        ========================================================= */}
-        <section className="about-closing">
-          <div className="about-closing-grid" />
-
-          <div className="about-shell about-closing-inner">
-            <ScrollReveal>
-              <div className="about-eyebrow about-eyebrow-dark">
-                <span className="about-eyebrow-line" />
-                The next chapter
-              </div>
-
-              <h2>
-                Your ambition
-                <br />
-                deserves <span>a sharper strategy.</span>
-              </h2>
-
-              <p>
-                Start with a conversation. Build from there.
+              <p style={{ fontSize: 'clamp(1.1rem, 1.4vw, 1.3rem)', lineHeight: 1.6, color: '#555555', maxWidth: '640px', marginBottom: '2.5rem' }}>
+                MK Publicity was founded on a simple conviction: ambitious Indian enterprises should never have to choose between creative flair and cold commercial math. We unite strategic PR authority, performance advertising, and modern IT systems under one roof.
               </p>
 
-              <button className="about-primary-button about-primary-button-large" onClick={openModal}>
-                Start the conversation
-                <ArrowRight size={19} />
-              </button>
-            </ScrollReveal>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                <button
+                  className="btn-gold"
+                  onClick={() => {
+                    trackConversionEvent('primary_cta_click', { location: 'about_hero' });
+                    setIsBriefModalOpen(true);
+                  }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}
+                >
+                  <Sparkles size={16} />
+                  <span>Start A Conversation</span>
+                  <ArrowRight size={16} />
+                </button>
+
+                <a 
+                  href="#founder"
+                  className="btn-editorial-ghost"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                >
+                  <span>Meet The Leadership</span>
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Right Visual Frame */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <div style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '420px',
+                aspectRatio: '4/5',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                border: '1px solid rgba(0, 0, 0, 0.08)',
+                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.12)'
+              }}>
+                <img
+                  src={imagePath}
+                  alt="Mehul Desai — Founder & CEO, MK Publicity"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    filter: 'contrast(1.02)'
+                  }}
+                />
+                
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 40%, transparent 100%)'
+                }} />
+
+                <div style={{
+                  position: 'absolute',
+                  bottom: '24px',
+                  left: '24px',
+                  right: '24px',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '16px 20px',
+                  borderRadius: '6px',
+                  border: '1px solid rgba(0, 0, 0, 0.08)',
+                  boxShadow: '0 10px 25px rgba(0, 0, 0, 0.08)'
+                }}>
+                  <div className="mono-sub text-gold" style={{ marginBottom: '4px', fontWeight: 700 }}>FOUNDER & CHIEF STRATEGIST</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0C0D0E', fontFamily: 'var(--font-display)' }}>Mehul Desai</div>
+                  <div style={{ fontSize: '0.78rem', color: '#555555' }}>Architecting brand dominance across South Gujarat & Pan-India</div>
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+
+        <style>{`
+          @media (min-width: 992px) {
+            .about-hero-editorial-grid {
+              grid-template-columns: 1fr 420px !important;
+              align-items: center !important;
+            }
+          }
+        `}</style>
+      </section>
+
+      {/* ═══ 2. SCALE & VERIFIED PROOF ═══ */}
+      <section style={{ padding: 'clamp(3rem, 5vw, 4.5rem) 0', borderBottom: '1px solid rgba(0, 0, 0, 0.08)', background: '#F5F5F2' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '2rem' }}>
+            {stats.map((stat, idx) => (
+              <div key={idx} style={{ borderLeft: '2px solid #F5C518', paddingLeft: '1.25rem' }}>
+                <div className="mono-sub" style={{ color: '#777777', marginBottom: '6px' }}>METRIC // 0{idx + 1}</div>
+                <div style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0C0D0E', fontFamily: 'var(--font-display)', lineHeight: 1 }}>
+                  {stat.number}{stat.suffix}
+                </div>
+                <div style={{ fontSize: '0.88rem', color: '#555555', marginTop: '6px' }}>{stat.label}</div>
+              </div>
+            ))}
+
+            <div style={{ borderLeft: '2px solid rgba(0, 0, 0, 0.15)', paddingLeft: '1.25rem' }}>
+              <div className="mono-sub text-gold" style={{ marginBottom: '6px', fontWeight: 700 }}>REGIONAL FOOTPRINT</div>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0C0D0E', fontFamily: 'var(--font-display)', lineHeight: 1.2 }}>
+                Surat Capital
+              </div>
+              <div style={{ fontSize: '0.88rem', color: '#555555', marginTop: '6px' }}>Textiles, Diamonds, Real Estate, FMCG</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 3. THE FOUNDER'S THESIS ═══ */}
+      <section id="founder" style={{ padding: 'clamp(4rem, 8vw, 6rem) 0', borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
+        <div className="container" style={{ maxWidth: '960px', margin: '0 auto' }}>
+          <div className="arch-sec-head" style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+            <span className="mono-sub text-gold">LEADERSHIP PHILOSOPHY</span>
+            <h2 className="display-title" style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)', marginTop: '0.5rem' }}>
+              The Founder's <span className="serif-em text-gold">Perspective</span>
+            </h2>
           </div>
 
-          <div className="about-closing-mark">MK</div>
-        </section>
-      </div>
-
-      <style>{`
-        :root {
-          --about-ink: #101113;
-          --about-paper: #f5f3ee;
-          --about-white: #ffffff;
-          --about-muted: #77736b;
-          --about-line: rgba(16, 17, 19, 0.12);
-          --about-gold: #b6904a;
-          --about-gold-soft: #d7bb83;
-          --about-dark: #0d0f11;
-        }
-
-        html {
-          scroll-behavior: smooth;
-        }
-
-        .about-page {
-          background: var(--about-paper);
-          color: var(--about-ink);
-          overflow: hidden;
-          font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        }
-
-        .about-page * {
-          box-sizing: border-box;
-        }
-
-        .about-shell {
-          width: min(1240px, calc(100% - 64px));
-          margin: 0 auto;
-          position: relative;
-          z-index: 2;
-        }
-
-        .about-page button,
-        .about-page a {
-          font: inherit;
-        }
-
-        .about-section-topline {
-          display: flex;
-          justify-content: space-between;
-          gap: 20px;
-          padding-bottom: 18px;
-          border-bottom: 1px solid var(--about-line);
-          color: #6c685f;
-          font-size: 11px;
-          text-transform: uppercase;
-          letter-spacing: 0.18em;
-          font-weight: 700;
-        }
-
-        .about-section-topline-light {
-          border-color: rgba(255,255,255,0.12);
-          color: rgba(255,255,255,0.55);
-        }
-
-        .about-eyebrow {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          color: #746f66;
-          font-size: 11px;
-          line-height: 1;
-          text-transform: uppercase;
-          letter-spacing: 0.18em;
-          font-weight: 800;
-        }
-
-        .about-eyebrow-dark {
-          color: rgba(255,255,255,0.64);
-        }
-
-        .about-eyebrow-line {
-          width: 28px;
-          height: 1px;
-          background: currentColor;
-          opacity: 0.8;
-        }
-
-        /* HERO */
-        .about-hero {
-          min-height: 94vh;
-          position: relative;
-          display: flex;
-          align-items: center;
-          background:
-            radial-gradient(circle at 18% 72%, rgba(182,144,74,0.11), transparent 30%),
-            radial-gradient(circle at 80% 22%, rgba(255,255,255,0.05), transparent 20%),
-            #0c0e10;
-          color: #fff;
-        }
-
-        .about-noise {
-          position: absolute;
-          inset: 0;
-          opacity: 0.07;
-          pointer-events: none;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
-        }
-
-        .about-hero-glow {
-          position: absolute;
-          border-radius: 999px;
-          filter: blur(40px);
-          pointer-events: none;
-        }
-
-        .about-hero-glow-a {
-          width: 240px;
-          height: 240px;
-          right: 10%;
-          top: 14%;
-          background: rgba(182,144,74,0.12);
-        }
-
-        .about-hero-glow-b {
-          width: 300px;
-          height: 300px;
-          left: -100px;
-          bottom: -120px;
-          background: rgba(91,104,123,0.18);
-        }
-
-        .about-hero-grid {
-          display: grid;
-          grid-template-columns: 0.96fr 1.04fr;
-          gap: clamp(44px, 6vw, 110px);
-          align-items: center;
-          padding: 92px 0 112px;
-        }
-
-        .about-hero-copy {
-          max-width: 640px;
-        }
-
-        .about-hero-copy h1 {
-          margin: 28px 0 26px;
-          font-size: clamp(4.6rem, 8.4vw, 8.8rem);
-          line-height: 0.86;
-          letter-spacing: -0.075em;
-          font-weight: 760;
-        }
-
-        .about-hero-copy h1 span {
-          color: var(--about-gold-soft);
-        }
-
-        .about-hero-copy p {
-          max-width: 570px;
-          margin: 0;
-          color: rgba(255,255,255,0.68);
-          font-size: clamp(1.05rem, 1.6vw, 1.28rem);
-          line-height: 1.75;
-        }
-
-        .about-hero-actions {
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          flex-wrap: wrap;
-          margin-top: 38px;
-        }
-
-        .about-primary-button {
-          border: 1px solid var(--about-gold);
-          background: var(--about-gold);
-          color: #111;
-          border-radius: 999px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          padding: 15px 20px;
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          font-weight: 800;
-          cursor: pointer;
-          transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
-          box-shadow: 0 12px 34px rgba(182,144,74,0.18);
-        }
-
-        .about-primary-button:hover {
-          transform: translateY(-2px);
-          background: #c6a55f;
-          box-shadow: 0 16px 42px rgba(182,144,74,0.25);
-        }
-
-        .about-ghost-button {
-          text-decoration: none;
-          color: rgba(255,255,255,0.76);
-          border: 1px solid rgba(255,255,255,0.15);
-          padding: 14px 18px;
-          border-radius: 999px;
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          font-weight: 800;
-          transition: border-color .25s ease, color .25s ease;
-        }
-
-        .about-ghost-button:hover {
-          color: #fff;
-          border-color: rgba(255,255,255,0.36);
-        }
-
-        .about-hero-caption {
-          margin-top: 34px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          color: rgba(255,255,255,0.42);
-          font-size: 11px;
-          text-transform: uppercase;
-          letter-spacing: 0.14em;
-          font-weight: 700;
-        }
-
-        .about-caption-dot {
-          width: 4px;
-          height: 4px;
-          background: var(--about-gold-soft);
-          border-radius: 50%;
-        }
-
-        .about-hero-visual {
-          position: relative;
-          min-height: 640px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .about-hero-image-frame {
-          width: min(100%, 590px);
-          position: relative;
-          overflow: hidden;
-          border: 1px solid rgba(255,255,255,0.12);
-          box-shadow: 0 30px 90px rgba(0,0,0,0.45);
-          background: #181b1f;
-        }
-
-        .about-hero-image-frame::after {
-          content: "";
-          position: absolute;
-          inset: 14px;
-          border: 1px solid rgba(255,255,255,0.12);
-          pointer-events: none;
-        }
-
-        .about-hero-image-frame img {
-          width: 100%;
-          height: auto;
-          display: block;
-          filter: none;
-        }
-
-        .about-hero-image-shade {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            to top,
-            rgba(7,8,9,0.82) 0%,
-            rgba(7,8,9,0.18) 36%,
-            rgba(7,8,9,0.04) 72%
-          );
-        }
-
-        .about-hero-image-label {
-          position: absolute;
-          z-index: 3;
-          left: 28px;
-          right: 28px;
-          bottom: 26px;
-          display: flex;
-          align-items: end;
-          justify-content: space-between;
-          gap: 20px;
-          padding-top: 20px;
-          border-top: 1px solid rgba(255,255,255,0.19);
-        }
-
-        .about-hero-image-label span {
-          color: rgba(255,255,255,0.55);
-          font-size: 9px;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: 0.18em;
-        }
-
-        .about-hero-image-label strong {
-          color: #fff;
-          font-size: 18px;
-          font-weight: 650;
-          letter-spacing: -0.02em;
-        }
-
-        .about-hero-orbit {
-          position: absolute;
-          border-radius: 50%;
-          border: 1px solid rgba(182,144,74,0.34);
-          pointer-events: none;
-        }
-
-        .orbit-a {
-          width: 580px;
-          height: 580px;
-          right: -60px;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-
-        .orbit-b {
-          width: 680px;
-          height: 680px;
-          right: -110px;
-          top: 50%;
-          transform: translateY(-50%);
-          border-color: rgba(255,255,255,0.06);
-        }
-
-        .about-floating-card {
-          position: absolute;
-          z-index: 5;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          background: rgba(15,17,19,0.88);
-          border: 1px solid rgba(255,255,255,0.12);
-          backdrop-filter: blur(14px);
-          box-shadow: 0 16px 40px rgba(0,0,0,0.25);
-        }
-
-        .about-floating-card-top {
-          top: 11%;
-          right: -26px;
-          padding: 13px 16px;
-          color: rgba(255,255,255,0.75);
-          font-size: 10px;
-          text-transform: uppercase;
-          letter-spacing: 0.13em;
-          font-weight: 800;
-        }
-
-        .about-floating-card-top svg {
-          color: var(--about-gold-soft);
-        }
-
-        .about-floating-card-bottom {
-          left: -30px;
-          bottom: 10%;
-          padding: 17px 20px;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 3px;
-          min-width: 160px;
-        }
-
-        .about-card-number {
-          color: #fff;
-          font-size: 30px;
-          line-height: 1;
-          letter-spacing: -0.05em;
-          font-weight: 700;
-        }
-
-        .about-card-label {
-          color: rgba(255,255,255,0.46);
-          font-size: 9px;
-          text-transform: uppercase;
-          letter-spacing: 0.14em;
-          font-weight: 800;
-        }
-
-        .about-scroll-cue {
-          position: absolute;
-          z-index: 5;
-          bottom: 28px;
-          left: max(32px, calc((100vw - 1240px) / 2));
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          color: rgba(255,255,255,0.42);
-          text-decoration: none;
-          font-size: 9px;
-          text-transform: uppercase;
-          letter-spacing: 0.16em;
-          font-weight: 800;
-        }
-
-        /* METRICS */
-        .about-metrics {
-          background: var(--about-dark);
-          color: #fff;
-          padding: 92px 0 105px;
-        }
-
-        .about-metrics-grid {
-          margin-top: 52px;
-          display: grid;
-          grid-template-columns: repeat(4, 1fr) 1.25fr;
-          gap: 0;
-          border-top: 1px solid rgba(255,255,255,0.12);
-          border-bottom: 1px solid rgba(255,255,255,0.12);
-        }
-
-        .about-metric {
-          position: relative;
-          min-height: 220px;
-          padding: 28px 26px;
-          border-right: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .about-metric:last-child {
-          border-right: 0;
-        }
-
-        .about-metric-index {
-          color: rgba(255,255,255,0.3);
-          font-size: 9px;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          font-weight: 800;
-        }
-
-        .about-metric-value {
-          margin-top: 56px;
-          color: #fff;
-          font-size: clamp(3rem, 5.1vw, 5.5rem);
-          line-height: 0.9;
-          letter-spacing: -0.065em;
-          font-weight: 700;
-        }
-
-        .about-metric-label {
-          margin-top: 14px;
-          color: rgba(255,255,255,0.52);
-          font-size: 10px;
-          text-transform: uppercase;
-          letter-spacing: 0.16em;
-          font-weight: 800;
-        }
-
-        .about-metric-featured {
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          gap: 30px;
-          background: linear-gradient(135deg, rgba(182,144,74,0.15), rgba(255,255,255,0.02));
-        }
-
-        .about-metric-icon {
-          width: 48px;
-          height: 48px;
-          display: grid;
-          place-items: center;
-          border: 1px solid rgba(182,144,74,0.34);
-          color: var(--about-gold-soft);
-        }
-
-        .about-metric-feature-text {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          align-items: flex-end;
-          text-align: right;
-        }
-
-        .about-metric-feature-text strong {
-          font-size: clamp(1.5rem, 2.5vw, 2.3rem);
-          line-height: 1;
-          letter-spacing: -0.04em;
-          font-weight: 650;
-        }
-
-        .about-metric-feature-text span {
-          color: rgba(255,255,255,0.45);
-          font-size: 10px;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-        }
-
-        /* FOUNDER */
-        .about-founder {
-          padding: 130px 0 150px;
-          background:
-            linear-gradient(90deg, #f7f5f0 0%, #f7f5f0 60%, #ebe7de 60%, #ebe7de 100%);
-        }
-
-        .about-founder-grid {
-          margin-top: 76px;
-          display: grid;
-          grid-template-columns: 0.98fr 1.02fr;
-          gap: clamp(50px, 8vw, 130px);
-          align-items: center;
-        }
-
-        .about-founder-photo-wrap {
-          position: relative;
-          padding-right: 28px;
-        }
-
-        .about-founder-photo {
-          position: relative;
-          overflow: hidden;
-          background: #181818;
-          box-shadow: 25px 28px 70px rgba(0,0,0,0.18);
-        }
-
-        .about-founder-photo::before {
-          content: "";
-          position: absolute;
-          z-index: 2;
-          inset: 18px;
-          border: 1px solid rgba(255,255,255,0.28);
-          pointer-events: none;
-        }
-
-        .about-founder-photo img {
-          width: 100%;
-          height: auto;
-          display: block;
-          filter: none;
-        }
-
-        .about-founder-photo-meta {
-          position: absolute;
-          right: -4px;
-          bottom: 28px;
-          z-index: 4;
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-          min-width: 160px;
-          padding: 14px 16px;
-          background: #121416;
-          color: #fff;
-          box-shadow: 0 18px 34px rgba(0,0,0,0.2);
-        }
-
-        .about-founder-photo-meta span:first-child {
-          color: var(--about-gold-soft);
-          font-size: 9px;
-          text-transform: uppercase;
-          letter-spacing: 0.16em;
-          font-weight: 800;
-        }
-
-        .about-founder-photo-meta span:last-child {
-          font-size: 12px;
-          color: rgba(255,255,255,0.78);
-        }
-
-        .about-founder-copy {
-          max-width: 650px;
-        }
-
-        .about-founder-copy h2 {
-          margin: 22px 0 0;
-          font-size: clamp(4rem, 7vw, 7.3rem);
-          line-height: 0.84;
-          letter-spacing: -0.075em;
-          font-weight: 730;
-        }
-
-        .about-founder-copy h2 span {
-          color: #6c665d;
-        }
-
-        .about-founder-role {
-          margin-top: 19px;
-          color: var(--about-gold);
-          text-transform: uppercase;
-          letter-spacing: 0.17em;
-          font-size: 10px;
-          font-weight: 900;
-        }
-
-        .about-founder-copy blockquote {
-          margin: 45px 0 0;
-          padding: 26px 0;
-          border-top: 1px solid rgba(16,17,19,0.13);
-          border-bottom: 1px solid rgba(16,17,19,0.13);
-        }
-
-        .about-founder-copy blockquote svg {
-          color: var(--about-gold);
-          margin-bottom: 12px;
-        }
-
-        .about-founder-copy blockquote p {
-          margin: 0;
-          font-family: Georgia, serif;
-          font-size: clamp(1.45rem, 2.4vw, 2.1rem);
-          line-height: 1.35;
-          color: #2e2b27;
-        }
-
-        .about-founder-body {
-          margin: 28px 0 0;
-          color: #67635b;
-          line-height: 1.8;
-          font-size: 1.03rem;
-        }
-
-        .about-founder-points {
-          margin-top: 32px;
-          display: grid;
-          gap: 12px;
-        }
-
-        .about-founder-points div {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          color: #514d46;
-          font-size: 12px;
-          font-weight: 700;
-        }
-
-        .about-founder-points svg {
-          color: var(--about-gold);
-          flex: 0 0 auto;
-        }
-
-        /* PRINCIPLES */
-        .about-principles {
-          background: #121416;
-          color: #fff;
-          padding: 130px 0 145px;
-        }
-
-        .about-principles .about-section-topline {
-          border-color: rgba(255,255,255,0.12);
-          color: rgba(255,255,255,0.55);
-        }
-
-        .about-principles-intro {
-          display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
-          gap: 90px;
-          align-items: end;
-        }
-
-        .about-principles .about-eyebrow {
-          color: rgba(255,255,255,0.5);
-          margin-top: 72px;
-        }
-
-        .about-principles .about-display-heading {
-          color: #fff;
-          margin-top: 24px;
-        }
-
-        .about-principles .about-display-heading em {
-          color: var(--about-gold-soft);
-        }
-
-        .about-principles-lead {
-          color: rgba(255,255,255,0.53);
-          font-size: 1.08rem;
-          line-height: 1.8;
-          max-width: 520px;
-          margin: 0 0 3px auto;
-        }
-
-        .about-principles-grid {
-          margin-top: 74px;
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          border-top: 1px solid rgba(255,255,255,0.12);
-          border-bottom: 1px solid rgba(255,255,255,0.12);
-        }
-
-        .about-principle-card {
-          position: relative;
-          min-height: 380px;
-          padding: 28px 26px;
-          border-right: 1px solid rgba(255,255,255,0.1);
-          background: linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0));
-          transition: background .3s ease;
-        }
-
-        .about-principle-card:last-child {
-          border-right: 0;
-        }
-
-        .about-principle-card:hover {
-          background: linear-gradient(180deg, rgba(182,144,74,0.11), rgba(255,255,255,0));
-        }
-
-        .about-principle-top {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          color: rgba(255,255,255,0.3);
-        }
-
-        .about-principle-top svg {
-          color: var(--about-gold-soft);
-        }
-
-        .about-principle-card h3 {
-          margin: 120px 0 14px;
-          font-size: 2rem;
-          letter-spacing: -0.04em;
-          font-weight: 650;
-        }
-
-        .about-principle-card p {
-          margin: 0;
-          color: rgba(255,255,255,0.46);
-          line-height: 1.7;
-          font-size: 0.96rem;
-        }
-
-        .about-principle-arrow {
-          position: absolute;
-          bottom: 24px;
-          right: 22px;
-          width: 38px;
-          height: 38px;
-          display: grid;
-          place-items: center;
-          border: 1px solid rgba(255,255,255,0.12);
-          color: rgba(255,255,255,0.5);
-          transition: color .25s ease, border-color .25s ease, transform .25s ease;
-        }
-
-        .about-principle-card:hover .about-principle-arrow {
-          color: var(--about-gold-soft);
-          border-color: rgba(182,144,74,0.5);
-          transform: translate(2px, -2px);
-        }
-
-        /* VALUES */
-        .about-values {
-          background: var(--about-paper);
-          padding: 125px 0 145px;
-        }
-
-        .about-values-heading {
-          margin-top: 72px;
-          display: grid;
-          grid-template-columns: 1fr 0.75fr;
-          gap: 90px;
-          align-items: end;
-        }
-
-        .about-values-heading h2 {
-          margin: 0;
-          font-size: clamp(4rem, 6.4vw, 7rem);
-          line-height: 0.88;
-          letter-spacing: -0.07em;
-          font-weight: 720;
-        }
-
-        .about-values-heading h2 span {
-          font-family: Georgia, serif;
-          font-weight: 400;
-          color: #6b655b;
-        }
-
-        .about-values-heading p {
-          margin: 0 0 7px;
-          color: #69655d;
-          line-height: 1.8;
-          max-width: 500px;
-          font-size: 1.02rem;
-        }
-
-        .about-values-grid {
-          margin-top: 78px;
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1px;
-          background: rgba(16,17,19,0.12);
-          border: 1px solid rgba(16,17,19,0.12);
-        }
-
-        .about-value-card {
-          min-height: 215px;
-          background: var(--about-paper);
-          padding: 28px;
-          transition: background .25s ease, transform .25s ease;
-        }
-
-        .about-value-card:hover {
-          background: #eeece6;
-          transform: translateY(-2px);
-        }
-
-        .about-value-number {
-          color: var(--about-gold);
-          font-size: 10px;
-          font-weight: 900;
-          letter-spacing: 0.15em;
-        }
-
-        .about-value-card h3 {
-          margin: 60px 0 10px;
-          font-size: 1.25rem;
-          letter-spacing: -0.03em;
-        }
-
-        .about-value-card p {
-          margin: 0;
-          color: #777269;
-          line-height: 1.65;
-          font-size: 0.92rem;
-          max-width: 310px;
-        }
-
-        /* CLOSING */
-        .about-closing {
-          position: relative;
-          min-height: 76vh;
-          display: flex;
-          align-items: center;
-          background: #0d0f11;
-          color: #fff;
-          overflow: hidden;
-        }
-
-        .about-closing-grid {
-          position: absolute;
-          inset: 0;
-          opacity: 0.25;
-          background-image:
-            linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-          background-size: 85px 85px;
-        }
-
-        .about-closing::after {
-          content: "";
-          position: absolute;
-          width: 700px;
-          height: 700px;
-          right: -220px;
-          bottom: -390px;
-          border-radius: 50%;
-          border: 1px solid rgba(182,144,74,0.2);
-          box-shadow:
-            0 0 0 80px rgba(182,144,74,0.025),
-            0 0 0 160px rgba(182,144,74,0.02);
-        }
-
-        .about-closing-inner {
-          padding: 110px 0;
-        }
-
-        .about-closing h2 {
-          margin: 28px 0 24px;
-          max-width: 850px;
-          font-size: clamp(4rem, 7.3vw, 8rem);
-          line-height: 0.88;
-          letter-spacing: -0.075em;
-          font-weight: 720;
-        }
-
-        .about-closing h2 span {
-          font-family: Georgia, serif;
-          color: var(--about-gold-soft);
-          font-weight: 400;
-        }
-
-        .about-closing p {
-          margin: 0;
-          color: rgba(255,255,255,0.5);
-          font-size: 1.05rem;
-        }
-
-        .about-primary-button-large {
-          margin-top: 38px;
-          padding: 17px 23px;
-        }
-
-        .about-closing-mark {
-          position: absolute;
-          right: 6vw;
-          bottom: 4vh;
-          font-size: clamp(8rem, 18vw, 19rem);
-          line-height: 0.72;
-          color: rgba(255,255,255,0.025);
-          font-weight: 800;
-          letter-spacing: -0.1em;
-          pointer-events: none;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1100px) {
-          .about-hero-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .about-hero-copy {
-            max-width: 780px;
-          }
-
-          .about-hero-visual {
-            min-height: auto;
-          }
-
-          .about-hero-image-frame {
-            width: min(100%, 680px);
-            height: 640px;
-          }
-
-          .about-floating-card-top {
-            right: 4%;
-          }
-
-          .about-floating-card-bottom {
-            left: 4%;
-          }
-
-          .about-metrics-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-
-          .about-metric:nth-child(2n) {
-            border-right: 0;
-          }
-
-          .about-metric {
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-          }
-
-          .about-metric-featured {
-            border-right: 0;
-          }
-
-          .about-founder {
-            padding-top: 95px;
-            padding-bottom: 110px;
-          }
-
-          .about-principles-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-
-          .about-principle-card:nth-child(2) {
-            border-right: 0;
-          }
-
-          .about-principle-card:nth-child(-n+2) {
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-          }
-        }
-
-        @media (max-width: 820px) {
-          .about-shell {
-            width: min(100% - 34px, 680px);
-          }
-
-          .about-hero {
-            min-height: auto;
-          }
-
-          .about-hero-grid {
-            padding: 72px 0 105px;
-          }
-
-          .about-hero-copy h1 {
-            font-size: clamp(4rem, 16vw, 6.4rem);
-          }
-
-          .about-hero-image-frame {
-            height: 610px;
-            min-height: 0;
-          }
-
-          .orbit-a {
-            width: 470px;
-            height: 470px;
-          }
-
-          .orbit-b {
-            width: 560px;
-            height: 560px;
-          }
-
-          .about-founder-grid,
-          .about-principles-intro,
-          .about-values-heading {
-            grid-template-columns: 1fr;
-            gap: 45px;
-          }
-
-          .about-founder {
-            background: #f7f5f0;
-          }
-
-          .about-founder-photo-wrap {
-            max-width: 560px;
-          }
-
-          .about-principles .about-eyebrow {
-            margin-top: 45px;
-          }
-
-          .about-principles-lead {
-            margin: 0;
-            max-width: 600px;
-          }
-
-          .about-values-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-
-          .about-closing {
-            min-height: 68vh;
-          }
-        }
-
-        @media (max-width: 600px) {
-          .about-section-topline span:last-child {
-            display: none;
-          }
-
-          .about-hero-grid {
-            padding-top: 54px;
-          }
-
-          .about-hero-copy h1 {
-            font-size: clamp(3.6rem, 18vw, 5.3rem);
-          }
-
-          .about-hero-copy p {
-            font-size: 1rem;
-            line-height: 1.7;
-          }
-
-          .about-hero-actions {
-            align-items: stretch;
-            flex-direction: column;
-          }
-
-          .about-primary-button,
-          .about-ghost-button {
-            width: 100%;
-          }
-
-          .about-hero-caption {
-            flex-wrap: wrap;
-            line-height: 1.5;
-          }
-
-          .about-hero-image-frame {
-            height: 520px;
-          }
-
-          .about-floating-card-top {
-            top: 6%;
-            right: 0;
-          }
-
-          .about-floating-card-bottom {
-            left: 0;
-            bottom: 5%;
-          }
-
-          .about-scroll-cue {
-            display: none;
-          }
-
-          .about-founder,
-          .about-values {
-            padding-top: 78px;
-            padding-bottom: 86px;
-          }
-
-          .about-metrics {
-            padding: 74px 0 78px;
-          }
-
-          .about-metrics-grid {
-            grid-template-columns: 1fr 1fr;
-          }
-
-          .about-metric {
-            min-height: 175px;
-            padding: 21px 18px;
-          }
-
-          .about-metric-value {
-            margin-top: 38px;
-            font-size: 3rem;
-          }
-
-          .about-metric-label {
-            font-size: 8px;
-            line-height: 1.45;
-          }
-
-          .about-metric-featured {
-            grid-column: 1 / -1;
-            min-height: 150px;
-          }
-
-          .about-metric-feature-text {
-            align-items: flex-start;
-            text-align: left;
-          }
-
-          .about-founder-photo-wrap {
-            padding-right: 18px;
-          }
-
-          .about-founder-copy h2 {
-            font-size: clamp(4rem, 18vw, 6rem);
-          }
-
-          .about-founder-copy blockquote p {
-            font-size: 1.35rem;
-          }
-
-          .about-principles {
-            padding: 78px 0 88px;
-          }
-
-          .about-principles-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .about-principle-card,
-          .about-principle-card:nth-child(2) {
-            border-right: 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-          }
-
-          .about-principle-card:last-child {
-            border-bottom: 0;
-          }
-
-          .about-principle-card h3 {
-            margin-top: 82px;
-          }
-
-          .about-values-heading {
-            margin-top: 52px;
-          }
-
-          .about-values-heading h2 {
-            font-size: clamp(3.8rem, 16vw, 5.6rem);
-          }
-
-          .about-values-grid {
-            grid-template-columns: 1fr;
-            margin-top: 54px;
-          }
-
-          .about-value-card {
-            min-height: 190px;
-          }
-
-          .about-value-card h3 {
-            margin-top: 48px;
-          }
-
-          .about-closing-inner {
-            padding: 85px 0;
-          }
-
-          .about-closing h2 {
-            font-size: clamp(3.7rem, 17vw, 5.7rem);
-          }
-        }
-      `}</style>
-    </>
+          <div style={{
+            background: '#FFFFFF',
+            border: '1px solid rgba(0, 0, 0, 0.08)',
+            padding: 'clamp(2rem, 4vw, 3.5rem)',
+            borderRadius: '8px',
+            position: 'relative',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)'
+          }}>
+            <Quote size={48} color="#B8860B" style={{ opacity: 0.25, position: 'absolute', top: '24px', right: '24px' }} />
+
+            <blockquote style={{
+              fontSize: 'clamp(1.2rem, 2vw, 1.6rem)',
+              lineHeight: 1.5,
+              color: '#0C0D0E',
+              fontFamily: 'var(--font-serif)',
+              fontStyle: 'italic',
+              marginBottom: '2rem'
+            }}>
+              “In competitive hubs like Surat, business owners are bombarded by agencies promising viral shortcuts and inflated metrics. Our role is to cut through that noise with disciplined strategy: build genuine brand authority, deploy high-converting ad pipelines, and construct tech systems that compound value month over month.”
+            </blockquote>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', borderTop: '1px solid rgba(0, 0, 0, 0.08)', paddingTop: '1.5rem' }}>
+              <div>
+                <div style={{ fontWeight: 800, fontSize: '1.1rem', color: '#0C0D0E' }}>Mehul Desai</div>
+                <div className="mono-sub" style={{ color: '#777777' }}>FOUNDER & CEO // MK PUBLICITY</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 4. FOUR OPERATING PRINCIPLES ═══ */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 0', borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
+        <div className="container">
+          <div className="arch-sec-head">
+            <span className="mono-sub text-gold">HOW WE OPERATE</span>
+            <div className="arch-head-split">
+              <h2 className="display-title" style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)' }}>
+                Four Non-Negotiable <span className="serif-em text-gold">Principles</span>
+              </h2>
+              <p className="arch-head-lead">
+                Strategy is not a slideshow. It is the quality of decisions made every single day in ad managers, PR newsrooms, and code repositories.
+              </p>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.5rem' }}>
+            {principles.map((p, idx) => {
+              const Icon = p.icon;
+              return (
+                <div
+                  key={idx}
+                  style={{
+                    background: '#FFFFFF',
+                    border: '1px solid rgba(0, 0, 0, 0.08)',
+                    padding: '2.25rem',
+                    borderRadius: '4px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.02)'
+                  }}
+                >
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                      <span className="mono-sub text-gold" style={{ fontSize: '0.8rem', fontWeight: 700 }}>{p.index}</span>
+                      <Icon size={22} color="#B8860B" />
+                    </div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.75rem', color: '#0C0D0E' }}>{p.title}</h3>
+                    <p style={{ color: '#555555', fontSize: '0.9rem', lineHeight: 1.6 }}>{p.text}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 5. SIX CORE VALUES ═══ */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 0', borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
+        <div className="container">
+          <div className="arch-sec-head">
+            <span className="mono-sub text-gold">AGENCY STANDARDS</span>
+            <div className="arch-head-split">
+              <h2 className="display-title" style={{ fontSize: 'clamp(2rem, 4vw, 3.2rem)' }}>
+                Standards Create <span className="serif-em text-gold">Reputation</span>
+              </h2>
+              <p className="arch-head-lead">
+                Culture is reflected in client deliverables. These six commitments define how we treat every partner relationship.
+              </p>
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: '1.5rem' }}>
+            {values.map((v, i) => (
+              <div
+                key={i}
+                style={{
+                  background: '#FFFFFF',
+                  border: '1px solid rgba(0, 0, 0, 0.08)',
+                  padding: '2rem',
+                  borderRadius: '4px',
+                  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.02)'
+                }}
+              >
+                <span className="mono-sub text-gold" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 700 }}>
+                  STANDARD // 0{i + 1}
+                </span>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '0.5rem', color: '#0C0D0E' }}>{v.title}</h3>
+                <p style={{ color: '#555555', fontSize: '0.88rem', lineHeight: 1.6 }}>{v.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 6. FINAL CONSULTATION CTA ═══ */}
+      <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 0', textAlign: 'center' }}>
+        <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <ScrollReveal>
+            <span className="mono-sub text-gold" style={{ display: 'block', marginBottom: '1rem' }}>
+              THE NEXT CHAPTER OF YOUR BUSINESS
+            </span>
+            <h2 className="display-title" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', marginBottom: '1.5rem' }}>
+              Your Ambition Deserves A <br/>
+              <span className="serif-em text-gold">Sharper Strategy.</span>
+            </h2>
+            <p style={{ color: '#555555', fontSize: '1.15rem', lineHeight: 1.6, marginBottom: '2.5rem' }}>
+              Schedule a strategic consultation directly with our leadership team in Surat. Discover what is possible when marketing, PR, and technology align.
+            </p>
+
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button
+                onClick={() => {
+                  trackConversionEvent('primary_cta_click', { location: 'about_footer_cta' });
+                  setIsBriefModalOpen(true);
+                }}
+                className="btn-gold"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}
+              >
+                <Sparkles size={18} />
+                <span>Start The Conversation</span>
+                <ArrowRight size={18} />
+              </button>
+
+              <a
+                href={getWhatsAppLink('Hi Mehul and MK Publicity team! I would like to schedule an introductory discussion.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-editorial-ghost"
+                onClick={() => trackConversionEvent('whatsapp_click', { location: 'about_footer_whatsapp' })}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+              >
+                <MessageCircle size={18} color="#25D366" />
+                <span>WhatsApp Directly</span>
+              </a>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+    </div>
   );
 }

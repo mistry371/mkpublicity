@@ -1,232 +1,244 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  ArrowRight, Sparkles, TrendingUp, Layers, 
-  Users, Lightbulb, Rocket, Target, Globe,
-  Building, Briefcase, Mail, MessageCircle,
-  BookOpen, BarChart
-} from 'lucide-react';
+import { ArrowRight, Sparkles, MessageCircle, ShieldCheck } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
-import ParticleBackground from './ParticleBackground';
+import { getWhatsAppLink } from '../data';
+import { trackConversionEvent } from '../utils/analytics';
 
 export default function PageHero({ 
   label, 
   title, 
   highlight, 
   highlightEnd = false, 
-  description
+  description,
+  ctaText = 'Discuss Strategic Brief',
+  secondaryCtaText = 'Direct WhatsApp Route'
 }) {
   const { openModal } = useModal();
 
-  // Dynamic animations based on page label
-  let VisualIcon = Layers;
-  let floating1 = { icon: TrendingUp, title: 'Scale', subtitle: 'Unprecedented Growth' };
-  let floating2 = { icon: Sparkles, title: 'Innovate', subtitle: 'Industry Leading' };
-
-  if (label === 'About Us') {
-    VisualIcon = Globe;
-    floating1 = { icon: Users, title: 'Team', subtitle: 'Global Experts' };
-    floating2 = { icon: Lightbulb, title: 'Vision', subtitle: 'Future Focused' };
-  } else if (label === 'Our Services') {
-    VisualIcon = Rocket;
-    floating1 = { icon: Target, title: 'Strategy', subtitle: 'Data-Driven' };
-    floating2 = { icon: TrendingUp, title: 'Growth', subtitle: 'Exponential ROI' };
-  } else if (label === 'Our Process') {
-    VisualIcon = Layers;
-    floating1 = { icon: Target, title: 'Execute', subtitle: 'Precision Focused' };
-    floating2 = { icon: BarChart, title: 'Measure', subtitle: 'Analytics Driven' };
-  } else if (label === 'Industries We Serve') {
-    VisualIcon = Building;
-    floating1 = { icon: Briefcase, title: 'B2B', subtitle: 'Enterprise Scale' };
-    floating2 = { icon: Globe, title: 'B2C', subtitle: 'Consumer Impact' };
-  } else if (label === 'Our Work') {
-    VisualIcon = Target;
-    floating1 = { icon: BarChart, title: 'Results', subtitle: 'Proven Impact' };
-    floating2 = { icon: Sparkles, title: 'Creative', subtitle: 'Award Winning' };
-  } else if (label === 'Contact Us') {
-    VisualIcon = MessageCircle;
-    floating1 = { icon: Mail, title: 'Connect', subtitle: '24/7 Support' };
-    floating2 = { icon: Users, title: 'Partner', subtitle: "Let's Collaborate" };
-  } else if (label === 'Insights & Knowledge') {
-    VisualIcon = BookOpen;
-    floating1 = { icon: Lightbulb, title: 'Insights', subtitle: 'Industry Trends' };
-    floating2 = { icon: Target, title: 'Strategy', subtitle: 'Actionable Advice' };
-  }
-
-  // Animation variants mirroring Home.jsx
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 }
+      transition: { staggerChildren: 0.12, delayChildren: 0.05 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
     }
-  };
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: 40, rotateX: 20 },
-    visible: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
   };
 
   const renderTitle = () => {
     if (!highlight) {
-      return (
-        <motion.span style={{ display: 'block' }} variants={titleVariants}>
-          {title}
-        </motion.span>
-      );
+      return title;
     }
     
     if (highlightEnd) {
       const parts = title.split(highlight);
       return (
         <>
-          <motion.span style={{ display: 'block' }} variants={titleVariants}>
-            {parts[0]}
-          </motion.span>
-          <motion.span style={{ display: 'block' }} variants={titleVariants}>
-            <span className="text-gradient">{highlight}</span>
-          </motion.span>
+          <span>{parts[0]}</span>
+          <span className="serif-em text-gold" style={{ display: 'inline', textTransform: 'none', marginLeft: '0.25em' }}>
+            {highlight}
+          </span>
         </>
       );
     } else {
       const parts = title.split(new RegExp(`(${highlight})`, 'i'));
-      return (
-        <motion.span style={{ display: 'block' }} variants={titleVariants}>
-          {parts.map((part, i) => 
-            part.toLowerCase() === highlight.toLowerCase() 
-              ? <span key={i} className="text-gradient">{part}</span>
-              : part
-          )}
-        </motion.span>
+      return parts.map((part, i) => 
+        part.toLowerCase() === highlight.toLowerCase() 
+          ? <span key={i} className="serif-em text-gold" style={{ textTransform: 'none' }}>{part}</span>
+          : part
       );
     }
   };
 
   return (
-    <section className="hero" style={{ paddingTop: '150px', paddingBottom: '100px', borderBottom: '1px solid var(--border-subtle)', position: 'relative', overflow: 'hidden' }}>
-      <div className="hero-bg"></div>
-      <ParticleBackground />
+    <section className="editorial-hero" style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.08)' }}>
+      <div className="hero-glow-bg" />
       
-      <div className="container">
-        <div className="hero-content" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '4rem', alignItems: 'center' }}>
-          
-          {/* Left Text Column */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3.5rem' }} className="page-hero-editorial-grid">
+            
+            {/* Main Text Content */}
             <motion.div
-              variants={itemVariants}
-              className="hero-badge"
-              style={{ background: 'transparent', border: 'none', padding: 0, fontSize: '0.9rem', letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--primary)', fontWeight: 700 }}
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+              style={{ maxWidth: '820px' }}
             >
-              {label}
-            </motion.div>
+              {/* Telemetry Badge */}
+              <motion.div variants={itemVariants} style={{ marginBottom: '1.25rem' }}>
+                <div style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '6px 14px',
+                  background: 'rgba(245, 197, 24, 0.12)',
+                  border: '1px solid rgba(212, 160, 23, 0.35)',
+                  borderRadius: '100px'
+                }}>
+                  <span style={{ color: '#B8860B', fontSize: '0.85rem' }}>✺</span>
+                  <span className="mono-sub" style={{ color: '#B8860B', letterSpacing: '0.12em', fontWeight: 700 }}>
+                    {label || 'STRATEGIC ARCHITECTURE // MK PUBLICITY'}
+                  </span>
+                </div>
+              </motion.div>
 
-            <motion.h1
-              className="hero-title"
-              style={{ fontSize: 'clamp(3.5rem, 8vw, 6.5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.05, marginBottom: 'var(--space-2xl)' }}
-            >
-              {renderTitle()}
-            </motion.h1>
-
-            {description && (
-              <motion.p
-                className="hero-subtitle"
+              {/* Title */}
+              <motion.h1
                 variants={itemVariants}
-                style={{ fontSize: '1.25rem', maxWidth: '600px', margin: '0 0 var(--space-3xl) 0', color: 'var(--text-secondary)' }}
+                className="display-title"
+                style={{
+                  fontSize: 'clamp(2.4rem, 5.5vw, 4.4rem)',
+                  lineHeight: 1.02,
+                  letterSpacing: '-0.035em',
+                  marginBottom: '1.5rem',
+                  color: '#0C0D0E'
+                }}
               >
-                {description}
-              </motion.p>
-            )}
+                {renderTitle()}
+              </motion.h1>
 
-            <motion.div variants={itemVariants} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
-              <button 
-                className="btn btn-primary btn-lg" 
-                onClick={openModal}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}
+              {/* Description */}
+              {description && (
+                <motion.p
+                  variants={itemVariants}
+                  style={{
+                    fontSize: 'clamp(1.05rem, 1.4vw, 1.25rem)',
+                    lineHeight: 1.6,
+                    color: '#555555',
+                    maxWidth: '680px',
+                    marginBottom: '2.5rem'
+                  }}
+                >
+                  {description}
+                </motion.p>
+              )}
+
+              {/* Action Buttons */}
+              <motion.div 
+                variants={itemVariants}
+                style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}
               >
-                Start Your Project <ArrowRight size={20} />
-              </button>
+                <button 
+                  className="btn-gold" 
+                  onClick={() => {
+                    trackConversionEvent('primary_cta_click', { location: `page_hero_${label || 'general'}` });
+                    openModal();
+                  }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}
+                >
+                  <Sparkles size={16} />
+                  <span>{ctaText}</span>
+                  <ArrowRight size={16} />
+                </button>
+
+                <a 
+                  href={getWhatsAppLink(`Hi MK Publicity! I would like to discuss ${label || 'a growth project'} for my company.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-editorial-ghost"
+                  onClick={() => trackConversionEvent('whatsapp_click', { location: `page_hero_${label || 'general'}` })}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                >
+                  <MessageCircle size={16} color="#25D366" />
+                  <span>{secondaryCtaText}</span>
+                </a>
+              </motion.div>
             </motion.div>
-          </motion.div>
 
-          {/* Right Visuals Column (Same styling as Home.jsx) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="hero-visuals"
-            style={{ 
-              position: 'relative', 
-              minHeight: '450px',
-              width: '100%',
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center'
-            }}
-          >
-            <style>
-              {`
-                @keyframes spin-slow { 100% { transform: rotate(360deg); } }
-                @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
-                @media (max-width: 900px) { .page-hero-visuals { display: none !important; } }
-              `}
-            </style>
-            <div className="page-hero-visuals" style={{ position: 'relative', width: '100%', maxWidth: '400px', height: '100%' }}>
-              
-              {/* Abstract Glowing Orb */}
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '250px', height: '250px', background: 'var(--primary-subtle)', borderRadius: '50%', filter: 'blur(50px)', zIndex: 0 }}></div>
-              
-              {/* Floating Element 1 */}
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ position: 'absolute', top: '10%', right: '-5%', background: '#fff', padding: '1.25rem', borderRadius: '1rem', boxShadow: 'var(--shadow-lg)', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '0.5rem', minWidth: '150px' }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary)' }}>
-                  <floating1.icon size={24} />
-                  <span style={{ fontWeight: 800, fontSize: '1.25rem', color: '#000' }}>{floating1.title}</span>
+            {/* Editorial Telemetry Signal Box */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid rgba(0, 0, 0, 0.08)',
+                padding: '2rem',
+                borderRadius: '12px',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.5rem',
+                maxWidth: '480px'
+              }}
+              className="page-hero-telemetry"
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(0, 0, 0, 0.08)', paddingBottom: '1rem' }}>
+                <span className="mono-sub" style={{ color: '#666666' }}>OPERATIONAL DIRECTIVE</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.72rem', color: '#16a34a', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#16a34a', display: 'inline-block' }}></span>
+                  Q3/Q4 INTAKE ACTIVE
+                </span>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem' }}>
+                <div style={{ borderLeft: '2px solid #F5C518', paddingLeft: '0.85rem' }}>
+                  <div className="mono-sub" style={{ color: '#777777', marginBottom: '4px' }}>VERIFIED RESULTS</div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0C0D0E', fontFamily: 'var(--font-display)' }}>500+</div>
+                  <div style={{ fontSize: '0.75rem', color: '#666666' }}>Campaigns Executed</div>
                 </div>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 600 }}>{floating1.subtitle}</span>
-              </motion.div>
 
-              {/* Floating Element 2 */}
-              <motion.div
-                animate={{ y: [0, 15, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                style={{ position: 'absolute', bottom: '15%', left: '-15%', background: '#111', padding: '1.25rem', borderRadius: '1rem', boxShadow: 'var(--shadow-lg)', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '0.5rem', minWidth: '150px' }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fff' }}>
-                  <floating2.icon size={24} />
-                  <span style={{ fontWeight: 800, fontSize: '1.25rem', color: '#fff' }}>{floating2.title}</span>
+                <div style={{ borderLeft: '2px solid rgba(0, 0, 0, 0.12)', paddingLeft: '0.85rem' }}>
+                  <div className="mono-sub" style={{ color: '#777777', marginBottom: '4px' }}>RESPONSE SLA</div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#B8860B', fontFamily: 'var(--font-display)' }}>&lt; 24H</div>
+                  <div style={{ fontSize: '0.75rem', color: '#666666' }}>Direct Strategist Review</div>
                 </div>
-                <span style={{ fontSize: '0.8rem', color: '#999', fontWeight: 600 }}>{floating2.subtitle}</span>
-              </motion.div>
 
-              {/* Center Abstract Graphic */}
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1, width: '220px', height: '220px', border: '1px solid var(--border-medium)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ width: '160px', height: '160px', border: '2px dashed var(--primary)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'spin-slow 25s linear infinite' }}>
-                  <div style={{ animation: 'spin-reverse 25s linear infinite' }}>
-                    <VisualIcon size={56} color="var(--primary)" strokeWidth={1.5} />
-                  </div>
+                <div style={{ borderLeft: '2px solid rgba(0, 0, 0, 0.12)', paddingLeft: '0.85rem' }}>
+                  <div className="mono-sub" style={{ color: '#777777', marginBottom: '4px' }}>ASSET CONTROL</div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0C0D0E', fontFamily: 'var(--font-display)' }}>100%</div>
+                  <div style={{ fontSize: '0.75rem', color: '#666666' }}>Client Code & Ad Ownership</div>
+                </div>
+
+                <div style={{ borderLeft: '2px solid #F5C518', paddingLeft: '0.85rem' }}>
+                  <div className="mono-sub" style={{ color: '#777777', marginBottom: '4px' }}>GEO FOOTPRINT</div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#B8860B', fontFamily: 'var(--font-display)' }}>SURAT</div>
+                  <div style={{ fontSize: '0.75rem', color: '#666666' }}>South Gujarat & Pan-India</div>
                 </div>
               </div>
 
-            </div>
-          </motion.div>
+              <div style={{ 
+                background: 'rgba(245, 197, 24, 0.08)', 
+                border: '1px solid rgba(212, 160, 23, 0.25)', 
+                padding: '0.85rem 1rem', 
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontSize: '0.78rem',
+                color: '#333333'
+              }}>
+                <ShieldCheck size={16} color="#B8860B" style={{ flexShrink: 0 }} />
+                <span>Zero junior sales handoffs. You work directly with experienced growth & PR practitioners.</span>
+              </div>
+            </motion.div>
+
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @media (min-width: 992px) {
+          .page-hero-editorial-grid {
+            grid-template-columns: 1fr 420px !important;
+            align-items: center !important;
+          }
+        }
+        @media (max-width: 991px) {
+          .page-hero-telemetry {
+            max-width: 100% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
